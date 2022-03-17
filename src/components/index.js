@@ -1,2 +1,3 @@
 // Here we'll have component exports
-export {};
+export * from './stepsprogress/stepprogress';
+export * from './stepsprogress/stepsprogress.style';
