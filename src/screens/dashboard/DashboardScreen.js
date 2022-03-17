@@ -1,6 +1,6 @@
 import React from 'react';
-import {Text} from 'react-native';
-import { Button } from './src/button/Button'
+import {Text, View} from 'react-native';
+import { Button } from '../../components'
 
 export const DashboardScreen = () => {
   
@@ -8,8 +8,6 @@ export const DashboardScreen = () => {
     <View>
       <Text>Initial Screen</Text>
       <Button />
-    </View>
-
-  
+    </View>  
   )
 };
