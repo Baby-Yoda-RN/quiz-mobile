@@ -2,10 +2,10 @@ import React from 'react';
 import {View, Text} from 'react-native';
 import {style} from './Header.styles';
 
-export const HeaderView = ({leftIcon, rightIcon, title}) => {
+export const HeaderView = ({leftIcon, rightIcon, title, ...rest}) => {
 
     return(
-        <View style={style.container} >
+        <View style={style.container} {...rest} >
             <View>
                 {/*Conditional rendering leftIcon*/}
                 {leftIcon && leftIcon}
