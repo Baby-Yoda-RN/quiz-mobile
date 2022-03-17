@@ -1,11 +1,12 @@
 import React from 'react';
 import { HeaderView } from './Header.view';
 
-export const Header = () => {
 
+export const Header = ({leftIcon = <></>, rightIcon = <></>, title = "title"}) => {
+ 
     return <HeaderView 
-            leftIcon={<></>} // Any RN component
-            rightIcon={<></>} // Any RN component
-            title={'title'}  // Any RN component or string
+            leftIcon={leftIcon} // Any RN component
+            rightIcon={rightIcon} // Any RN component
+            title={title}  // Any RN component or string
             />;
 }
