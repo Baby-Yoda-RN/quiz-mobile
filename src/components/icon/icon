@@ -1,6 +1,11 @@
 import React from 'react';
 import {View, StyleSheet, Text} from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
-const style = {}
-
-export ;
+export const icon = () => {
+    return (
+        <View>
+            <Icon name="camera" type="FontAwesome" size={25} color="#5463FF" />
+        </View>
+    )
+};
