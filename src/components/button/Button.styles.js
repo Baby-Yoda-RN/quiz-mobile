@@ -11,11 +11,6 @@ export const styles = StyleSheet.create({
     buttonDisabled: {
         backgroundColor: '#D1D1D1',
     },
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        paddingHorizontal: 10
-    },
     title: {
         fontSize: 23,
         lineHeight: 34,
