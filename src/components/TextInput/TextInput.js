@@ -1,9 +1,19 @@
-import { View, Text } from 'react-native'
-import React from 'react'
-import {TextInputView} from './TextInput.view'
+import React from 'react';
+import {TextInputView} from './TextInput.view';
 
-export const TextInput = ({placeHolder,isSensitive = false, ...rest}) => {
+export const TextInput = ({
+  placeHolder,
+  isSensitive = false,
+  style,
+  ...rest
+}) => {
   return (
-    <TextInputView placeHolder={placeHolder} isSensitive={isSensitive} {...rest}/>
-  )
-}
+    <TextInputView
+      placeHolder={placeHolder}
+      isSensitive={isSensitive}
+      customStyles={style}
+      {...rest}
+    />
+  );
+};
+
