@@ -13,8 +13,10 @@ export const ContainerView = ({pageContainer, background, isVerticallyCentered =
 
 
     return (
-        <SafeAreaView style={containerAlignment} >
+        <SafeAreaView style={{containerAlignment}} >
+            <View style ={{backgroundColor: background}}>
             <Text>{pageContainer}</Text>
+            </View>
         </SafeAreaView>
     );
 }

@@ -5,7 +5,7 @@ import {ContainerView} from './Container.view';
 export const Container = ({PageContainer}) =>{
     return <ContainerView
             pageContainer = 'test'
-            background = 'blue'
+            background = 'green'
             isVerticallyCentered
             />;
 
