@@ -1,3 +1,8 @@
 import React from 'react';
 
-export const ListContainer = ['Item1', 'Item2'];
+export const ListContainer = ({title = '', subtitle}) => {
+  if (title == '') {
+    title = 'test';
+  } else if (title) {
+  }
+};

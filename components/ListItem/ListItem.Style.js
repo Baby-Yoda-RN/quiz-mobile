@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 22,
-    backgroundColor: '#fff',
+    backgroundColor: '#ffffff',
     borderColor: '#e5e5e5',
     borderWidth: 1,
     borderRadius: 8,
@@ -15,4 +15,11 @@ export const styles = StyleSheet.create({
     fontSize: 18,
     height: 44,
   },
+  subitem: {
+    padding: 10,
+    fontSize: 18,
+    height: 44,
+  },
 });
+
+export const 
