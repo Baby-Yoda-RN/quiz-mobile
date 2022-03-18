@@ -2,11 +2,12 @@ import React from 'react';
 import { StyleSheet, Text } from 'react-native';
 import {ContainerView} from './Container.view';
 
-export const Container = ({PageContainer}) =>{
+export const Container = ({pageContainer = 'Text', background, isVerticallyCentered = false, horizontalPadding = 28}) =>{
     return <ContainerView
-            pageContainer = 'test'
-            background = 'green'
-            isVerticallyCentered
+            pageContainer = {pageContainer}
+            background = {background}
+            isVerticallyCentered ={isVerticallyCentered}
+            horizontalPadding = {horizontalPadding}
             />;
 
 }

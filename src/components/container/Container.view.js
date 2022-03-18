@@ -2,19 +2,21 @@ import React from 'react';
 import {View, Text, SafeAreaView} from 'react-native';
 import {style} from './Container.styles';
 
-export const ContainerView = ({pageContainer, background, isVerticallyCentered = false}) =>{
-    let containerAlignment;
-    if (isVerticallyCentered){
-        containerAlignment = style.containerCentered;
+export const ContainerView = ({pageContainer, background, isVerticallyCentered, horizontalPadding}) =>{
+
+    if(isVerticallyCentered){
+        return (
+            <SafeAreaView style={[style.containerCentered,{backgroundColor: background}, {paddingHorizontal: horizontalPadding}]} >
+                <Text>{pageContainer}</Text>
+            </SafeAreaView>
+        );
     }
     else{
-        containerAlignment = style.containerStart;
+        return (
+            <SafeAreaView style={[style.containerStart,{backgroundColor: background}, {paddingHorizontal: horizontalPadding}]} >
+                <Text>{pageContainer}</Text>
+            </SafeAreaView>
+        );
+
     }
-
-
-    return (
-        <SafeAreaView style={[containerAlignment,{backgroundColor: background}]} >
-            <Text>{pageContainer}</Text>
-        </SafeAreaView>
-    );
 }
