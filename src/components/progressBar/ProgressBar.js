@@ -1,24 +1,27 @@
 import React from 'react';
 import {View} from 'react-native';
 import {styles} from './progressBar.style';
-import {INITIAL_BAR_SIZE, INITIAL_BAR_MARGIN} from '../theme.style';
 
-export const ProgressBar = ({value = 50, max = 100}) => {
-  const progressValue =
-    value < INITIAL_BAR_MARGIN
-      ? INITIAL_BAR_MARGIN
-      : value * ((max - INITIAL_BAR_SIZE) / max);
-  const tempProgressIndicatorBar = [
-    styles.progressIndicatorBar,
-    {width: `${progressValue}%`},
-  ];
-  const tempEmptyBar = [styles.emptyBar, {width: `${max}%`}];
+export const ProgressBar = ({percentage = 0, containerStyle, ...rest}) => {
+  let _progressWidth;
+
+  if (percentage <= 0) {
+    _progressWidth = 0;
+  } else if (percentage > 100) {
+    _progressWidth = 100;
+  } else {
+    _progressWidth = percentage;
+  }
+
+  const progressBarStyle = {
+    width: `${_progressWidth}%`,
+  };
 
   return (
-    <View style={styles.container}>
-      <View style={tempEmptyBar}>
-        <View style={styles.initialBar} />
-        <View style={tempProgressIndicatorBar} />
+    <View style={[styles.container, containerStyle]} {...rest}>
+      <View style={styles.initialProgressBar} />
+      <View style={[styles.progressBarContainer]}>
+        <View style={[styles.progressBar, progressBarStyle]} />
       </View>
     </View>
   );

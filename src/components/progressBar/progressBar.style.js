@@ -1,34 +1,49 @@
-import {PRIMARY, MIDGREY, INITIAL_BAR_MARGIN} from '../theme.style';
+import {color, size} from '../../theme/';
 
 export const styles = {
   container: {
-    flex: 1,
-    margin: 20,
-    justifyContent: 'center',
+    flexDirection: 'row',
   },
-  initialBar: {
-    height: 15,
+  initialProgressBar: {
     width: '3%',
-    backgroundColor: PRIMARY,
-    borderTopLeftRadius: 10,
-    borderBottomLeftRadius: 10,
-    overflow: 'hidden',
-    position: 'absolute',
+    minHeight: size.sm,
+    backgroundColor: color.primary,
+    borderTopLeftRadius: size.sm,
+    borderBottomLeftRadius: size.sm,
   },
-  progressIndicatorBar: {
-    height: 15,
-    marginLeft: `${INITIAL_BAR_MARGIN}%`,
-    backgroundColor: PRIMARY,
-    borderTopRightRadius: 10,
-    borderBottomRightRadius: 10,
-    overflow: 'hidden',
-    position: 'absolute',
+  progressBarContainer: {
+    flex: 1,
   },
-  emptyBar: {
-    height: 15,
-    width: '100%',
-    backgroundColor: MIDGREY,
-    borderRadius: 5,
-    position: 'absolute',
+  progressBar: {
+    minHeight: 8,
+    backgroundColor: color.primary,
+    borderTopRightRadius: size.sm,
+    borderBottomRightRadius: size.sm,
   },
+
+  // initialBar: {
+  //   height: 15,
+  //   width: '3%',
+  //   backgroundColor: PRIMARY,
+  //   borderTopLeftRadius: 10,
+  //   borderBottomLeftRadius: 10,
+  //   overflow: 'hidden',
+  //   position: 'absolute',
+  // },
+  // progressIndicatorBar: {
+  //   height: 15,
+  //   marginLeft: `${INITIAL_BAR_MARGIN}%`,
+  //   backgroundColor: PRIMARY,
+  //   borderTopRightRadius: 10,
+  //   borderBottomRightRadius: 10,
+  //   overflow: 'hidden',
+  //   position: 'absolute',
+  // },
+  // emptyBar: {
+  //   height: 15,
+  //   width: '100%',
+  //   backgroundColor: MIDGREY,
+  //   borderRadius: 5,
+  //   position: 'absolute',
+  // },
 };
