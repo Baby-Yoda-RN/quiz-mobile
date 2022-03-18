@@ -10,6 +10,7 @@ export const style = StyleSheet.create({
         height: '10%',
         justifyContent: 'space-between',
         paddingHorizontal: 25,
-        paddingVertical: 15,
-    }
+        paddingVertical: 15
+    },
+    
 });
