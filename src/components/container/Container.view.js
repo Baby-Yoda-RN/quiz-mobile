@@ -14,7 +14,7 @@ export const ContainerView = ({pageContainer, background, isVerticallyCentered, 
     else{
         return (
             <SafeAreaView style={[style.containerStart,{backgroundColor: background}, {paddingHorizontal: horizontalPadding}]} >
-                <Text>{pageContainer}</Text>
+                {pageContainer}
             </SafeAreaView>
         );
 
