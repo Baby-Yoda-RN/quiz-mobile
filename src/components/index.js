@@ -1,2 +1,2 @@
 // Here we'll have component exports
-export {};
+export * from './button/Button';

@@ -1,6 +1,13 @@
 import React from 'react';
-import {Text} from 'react-native';
+import {Text, View} from 'react-native';
+import { Button } from '../../components'
 
 export const DashboardScreen = () => {
-  return <Text>Initial Screen</Text>;
+  
+  return (
+    <View>
+      <Text>Initial Screen</Text>
+      <Button />
+    </View>  
+  )
 };
