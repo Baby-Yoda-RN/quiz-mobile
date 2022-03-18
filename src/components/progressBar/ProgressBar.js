@@ -1,12 +1,25 @@
 import React from 'react';
-import {SafeAreaView, StatusBar, Text, View} from 'react-native';
+import {View} from 'react-native';
 import {styles} from './progressBar.style';
+import {INITIAL_BAR_SIZE, INITIAL_BAR_MARGIN} from '../theme.style';
 
-export const ProgressBar = ({value = '5%', max = '100'}) => {
+export const ProgressBar = ({value = 50, max = 100}) => {
+  const progressValue =
+    value < INITIAL_BAR_MARGIN
+      ? INITIAL_BAR_MARGIN
+      : value * ((max - INITIAL_BAR_SIZE) / max);
+  const tempProgressIndicatorBar = [
+    styles.progressIndicatorBar,
+    {width: `${progressValue}%`},
+  ];
+  const tempEmptyBar = [styles.emptyBar, {width: `${max}%`}];
+
   return (
     <View style={styles.container}>
-      <View style={[styles.frontBar, {width: `${max}%`}]} />
-      <View style={[styles.backBar, {width: `${value}%`}]} />
+      <View style={tempEmptyBar}>
+        <View style={styles.initialBar} />
+        <View style={tempProgressIndicatorBar} />
+      </View>
     </View>
   );
 };
