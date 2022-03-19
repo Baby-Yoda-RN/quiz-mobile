@@ -1,6 +1,6 @@
 import React from 'react';
 import { HeaderView } from './Header.view';
-import {Icon} from '../../components/icon/Icon';
+import {Icon} from '../../components';
 import {size, color} from '../../theme';
 
 export const Header = () => {
