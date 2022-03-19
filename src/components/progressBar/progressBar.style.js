@@ -3,7 +3,7 @@ import {size} from '../../theme/size';
 
 export const styles = {
   container: {
-    margin: 20,
+    margin: size.rg,
     justifyContent: 'center',
   },
   initialBar: {
