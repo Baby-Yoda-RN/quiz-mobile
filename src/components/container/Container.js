@@ -8,7 +8,7 @@ export const Container = ({children, background , isVerticallyCentered = false, 
     isVerticallyCentered ? containerStyle = style.containerCentered : containerStyle = style.container;
 
     return (
-            <SafeAreaView style={[containerStyle,{backgroundColor: background, paddingHorizontal: horizontalPadding, ...rest}]} >
+            <SafeAreaView style={[containerStyle,{backgroundColor: background, paddingHorizontal: horizontalPadding}]} {...rest} >
                {children}
             </SafeAreaView>
         );
