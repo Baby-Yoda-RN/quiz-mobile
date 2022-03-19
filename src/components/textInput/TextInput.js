@@ -1,17 +1,22 @@
+import {TextInput as NativeTextInput } from 'react-native';
 import React from 'react';
-import {TextInputView} from './TextInput.view';
+import {styles} from './TextInput.styles';
+import {color} from '../../theme/'
+
 
 export const TextInput = ({
   placeHolder,
   isSensitive = false,
-  style,
+  style:customStyles,
   ...rest
 }) => {
+
   return (
-    <TextInputView
-      placeHolder={placeHolder}
-      isSensitive={isSensitive}
-      customStyles={style}
+    <NativeTextInput
+      style={[styles.textInputStyles, customStyles]}
+      placeholder={placeHolder}
+      secureTextEntry={isSensitive}
+      placeholderTextColor={color.lightGray}
       {...rest}
     />
   );
