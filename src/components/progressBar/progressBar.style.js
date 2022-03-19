@@ -1,5 +1,4 @@
-import {color} from '../../theme/style';
-import {size} from '../../theme/size';
+import {color, size} from '../../theme';
 
 export const styles = {
   container: {

@@ -6,7 +6,7 @@ import {ProgressBar} from '../../components/progressBar/ProgressBar';
 export const DashboardScreen = () => {
   return (
     <View>
-      <ProgressBar percentage={44} newMax={100} />
+      <ProgressBar percentage={44} />
       <Text>Initial Screen</Text>
       <Button />
     </View>

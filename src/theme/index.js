@@ -1,2 +1,2 @@
 export * from './color';
-export * from './size.js';
+export * from './size';
