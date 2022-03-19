@@ -4,10 +4,9 @@ import Icons from 'react-native-vector-icons/FontAwesome5';
 import {styles} from './Icon.style';
 
 export const Icon = ({iconName = "angle-right",iconSize = styles.regular,iconColor = "#000000"}) => {
-    console.log(styles);
   return (
   <View>
-    <Icons name={iconName} type="FontAwesome5" size={styles[iconSize]} color={iconColor} style={{margin: 5, }} />
+    <Icons name={iconName} type="FontAwesome5" size={styles[iconSize]} color={iconColor}/>
   </View>
   )
 };
