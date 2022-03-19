@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, View} from 'react-native';
 import {Button} from '../../components';
-import { ListView } from '../../components/listView/ListView';
+import { ListView } from '../../components';
 import {ProgressBar} from '../../components/progressBar/ProgressBar';
 
 export const DashboardScreen = () => {
