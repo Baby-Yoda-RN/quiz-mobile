@@ -1,4 +1,5 @@
 import {color} from '../../theme/style';
+import {size} from '../../theme/size';
 
 export const styles = {
   container: {
@@ -6,24 +7,24 @@ export const styles = {
     justifyContent: 'center',
   },
   initialBar: {
-    height: 8,
+    height: size.sm,
     width: '3%',
     backgroundColor: color.primary,
-    borderRadius: 8,
+    borderRadius: size.sm,
     overflow: 'hidden',
     position: 'absolute',
   },
   progressIndicatorBar: {
-    height: 8,
+    height: size.sm,
     marginLeft: '2%',
     backgroundColor: color.primary,
-    borderTopRightRadius: 8,
-    borderBottomRightRadius: 8,
+    borderTopRightRadius: size.sm,
+    borderBottomRightRadius: size.sm,
     overflow: 'hidden',
     position: 'absolute',
   },
   emptyBar: {
-    height: 8,
+    height: size.sm,
     width: '100%',
     backgroundColor: color.midGray,
     borderRadius: 5,

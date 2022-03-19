@@ -10,8 +10,6 @@ export const ProgressBar = ({percentage = 0, newMax}) => {
       : percentage > 100
       ? 100
       : percentage * ((max - 2) / max);
-
-  console.log(progressValue);
   const tempProgressIndicatorBar = [
     styles.progressIndicatorBar,
     {width: `${progressValue}%`},
