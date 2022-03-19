@@ -1,6 +1,7 @@
-import {TextInput as NativeTextInput, StyleSheet} from 'react-native';
+import {TextInput as NativeTextInput } from 'react-native';
 import React from 'react';
 import {styles} from './TextInput.styles';
+import {color} from '../../theme/'
 
 /*
  * TextInput Component
@@ -9,22 +10,17 @@ import {styles} from './TextInput.styles';
 
 export const TextInputView = ({
   placeHolder,
-  isSensitive,
+  isSensitive = false,
   customStyles,
   ...rest
 }) => {
-  //Merge default styles and user styles
-  const flattenStyle = StyleSheet.flatten([
-    styles.textInputStyles,
-    customStyles,
-  ]);
 
   return (
     <NativeTextInput
-      style={flattenStyle}
+      style={[styles.textInputStyles, customStyles]}
       placeholder={placeHolder}
-      secureTextEntry={isSensitive ? true : false}
-      placeholderTextColor={'rgba(51,51,51,0.45)'}
+      secureTextEntry={isSensitive}
+      placeholderTextColor={color.lightGray}
       {...rest}
     />
   );
