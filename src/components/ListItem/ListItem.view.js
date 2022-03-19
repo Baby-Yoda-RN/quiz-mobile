@@ -1,38 +1,43 @@
 import React from 'react';
-import {style} from './ListItem.style';
+import {style} from './ListItem.Style';
 import {View, TouchableOpacity, Text} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome5';
-//import {Icon} from 'react-native-elements';
+import Icons from 'react-native-vector-icons/FontAwesome5';
 
-const iconSize = 50;
+const _iconSize = 15;
+const _iconName = 'angle-right';
+const _iconColor = '#7199FF';
 
 export const Item = ({
   Title = '',
   subtitle = 'Test one is about this',
-  icon,
   MaxTitleLength,
+  onPress,
+  iconName = _iconName,
+  iconSize = _iconSize,
+  iconColor = _iconColor,
 }) => {
   if (Title == '') {
-    Title = 'Test';
+    Title = 'Test 1';
   } else if (Title.length > MaxTitleLength) {
     Title = '...';
   }
 
   return (
     <View style={style.container}>
-      <TouchableOpacity>
-        <View
-          style={{
-            flex: 0,
-            flexDirection: 'row',
-          }}>
-          <View style={{flex: 2}}>
-            <Text style={style.FontSizeTitle}>{Title}</Text>
+      <TouchableOpacity onPress={onPress}>
+        <View style={style.AlignmentContainer}>
+          <View style={style.AlignmentContainerText}>
+            <Text style={style.FontStyleSizeTitle}>{Title}</Text>
             <Text style={style.FontStyleSubTitle}>{subtitle}</Text>
           </View>
 
-          <View style={style.rightend}>
-            <Icon name="arrow-right" size={30} color="black" type="entypo" />
+          <View style={style.IconStyle}>
+            <Icons
+              name={iconName}
+              type="FontAwesome5"
+              size={iconSize}
+              color={iconColor}
+            />
           </View>
         </View>
       </TouchableOpacity>

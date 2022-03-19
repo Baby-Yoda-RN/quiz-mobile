@@ -3,37 +3,42 @@ import {StyleSheet} from 'react-native';
 
 export const style = StyleSheet.create({
   container: {
-    paddingTop: 22,
     backgroundColor: '#ffffff',
     borderColor: '#e5e5e5',
     borderWidth: 2,
     borderRadius: 8,
     height: 70,
   },
-  FontSizeTitle: {
-    flex: 2,
-    padding: 5,
+
+  AlignmentContainer: {
+    flex: 0,
+    flexDirection: 'row',
+  },
+
+  AlignmentContainerText: {
+    flex: 1,
+  },
+
+  FontStyleSizeTitle: {
+    fontFamily: 'Poppins',
+    fontWeight: 'normal',
+    paddingTop: 11,
+    paddingLeft: 18,
     fontSize: 18,
+    color: '#1E4D58',
   },
 
   FontStyleSubTitle: {
-    padding: 5,
+    fontFamily: 'Poppins',
+    fontWeight: 'normal',
+    paddingTop: 5,
+    paddingLeft: 18,
     fontSize: 12,
+    color: '#1E4D58',
   },
 
-  defaultStyle: {
-    color: '#5463FF',
-    fontSize: 18,
-    fontWeight: 'bold',
-    margin: 5,
-  },
-
-  leftend: {
-    flex: 2,
-  },
-
-  rightend: {
-    flex: 1,
-    // alignitems: center;,
+  IconStyle: {
+    paddingRight: 29.79,
+    paddingTop: 24,
   },
 });
