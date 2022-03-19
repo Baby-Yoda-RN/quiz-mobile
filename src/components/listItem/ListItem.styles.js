@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
         alignItems:'center',
     },
     infoContainer:{
-        width:'70%',
+        flex:1,
     },
     iconContainer:{
         paddingHorizontal:size.sm,
