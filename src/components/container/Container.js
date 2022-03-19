@@ -1,13 +1,15 @@
 import React from 'react';
-import { StyleSheet, Text } from 'react-native';
-import {ContainerView} from './Container.view';
+import { StyleSheet, Text, SafeAreaView } from 'react-native';
+import {style} from './Container.styles';
 
-export const Container = ({pageContainer, background, isVerticallyCentered = false, horizontalPadding = 28}) =>{
-    return <ContainerView
-            pageContainer = {pageContainer}
-            background = {background}
-            isVerticallyCentered ={isVerticallyCentered}
-            horizontalPadding = {horizontalPadding}
-            />;
+export const Container = ({children = <Text>hello</Text> , background , isVerticallyCentered = false, horizontalPadding = 32, ...rest}) =>{
+    let containerStyle;
+    isVerticallyCentered ? containerStyle = style.containerCentered : containerStyle = style.container;
+
+    return (
+            <SafeAreaView style={[containerStyle,{backgroundColor: background, paddingHorizontal: horizontalPadding, ...rest}]} >
+               {children}
+            </SafeAreaView>
+        );
 
 }

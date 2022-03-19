@@ -1,7 +1,8 @@
 import {StyleSheet} from 'react-native';
 
 export const style = StyleSheet.create({
-    containerDefault: {
+    container: {
+        verticalPadding: 100,
         justifyContent: 'flex-start',
     },
     containerCentered: {
