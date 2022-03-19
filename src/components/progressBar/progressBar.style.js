@@ -1,33 +1,31 @@
-import {PRIMARY, MIDGREY, INITIAL_BAR_MARGIN} from '../theme.style';
+import {color} from '../../theme/style';
 
 export const styles = {
   container: {
-    flex: 1,
     margin: 20,
     justifyContent: 'center',
   },
   initialBar: {
     height: 15,
     width: '3%',
-    backgroundColor: PRIMARY,
-    borderTopLeftRadius: 10,
-    borderBottomLeftRadius: 10,
+    backgroundColor: color.primary,
+    borderRadius: 15,
     overflow: 'hidden',
     position: 'absolute',
   },
   progressIndicatorBar: {
     height: 15,
-    marginLeft: `${INITIAL_BAR_MARGIN}%`,
-    backgroundColor: PRIMARY,
-    borderTopRightRadius: 10,
-    borderBottomRightRadius: 10,
+    marginLeft: '2%',
+    backgroundColor: color.primary,
+    borderTopRightRadius: 15,
+    borderBottomRightRadius: 15,
     overflow: 'hidden',
     position: 'absolute',
   },
   emptyBar: {
     height: 15,
     width: '100%',
-    backgroundColor: MIDGREY,
+    backgroundColor: color.midGray,
     borderRadius: 5,
     position: 'absolute',
   },
