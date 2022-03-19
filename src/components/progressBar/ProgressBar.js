@@ -4,7 +4,14 @@ import {styles} from './progressBar.style';
 
 export const ProgressBar = ({percentage = 0, newMax}) => {
   const max = 100;
-  const progressValue = percentage < 0 ? 0 : percentage * ((max - 2) / max);
+  const progressValue =
+    percentage < 0
+      ? 0
+      : percentage > 100
+      ? 100
+      : percentage * ((max - 2) / max);
+
+  console.log(progressValue);
   const tempProgressIndicatorBar = [
     styles.progressIndicatorBar,
     {width: `${progressValue}%`},
