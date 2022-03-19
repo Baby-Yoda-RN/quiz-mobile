@@ -1,7 +1,15 @@
 import React from 'react';
-import {Text} from 'react-native';
+import {Text, View} from 'react-native';
+import { Button } from '../../components'
 import {ProgressBar} from '../../components/progressBar/ProgressBar';
 
 export const DashboardScreen = () => {
-  return <ProgressBar percentage={0} newMax={100} />;
+  
+  return (
+    <View>
+      <ProgressBar percentage={0} newMax={100} />
+      <Text>Initial Screen</Text>
+      <Button />
+    </View>  
+  )
 };
