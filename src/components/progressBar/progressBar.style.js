@@ -27,7 +27,7 @@ export const styles = {
     height: size.sm,
     width: '100%',
     backgroundColor: color.midGray,
-    borderRadius: 5,
+    borderRadius: size.sm,
     position: 'absolute',
   },
 };
