@@ -7,12 +7,10 @@ import {ProgressBar} from '../../components/progressBar/ProgressBar';
 export const DashboardScreen = () => {
   return (
     <View>
-      <ProgressBar percentage={44} />
-      <Text>Initial Screen</Text>
-      <Text>This is a test.</Text>
-      <Button />
-      <Icon iconSize={"regular"} iconName={"boxes"} iconColor={"#000000"}/>
-      <Text>This is a test.</Text>
+    <Icon iconSize={"regular"} iconName={"boxes"} iconColor={"#000000"}/>
+    <ProgressBar percentage={44} />
+    <Text>Initial Screen</Text>
+    <Button />
     </View>
   );
 };
