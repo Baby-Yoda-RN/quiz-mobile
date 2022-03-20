@@ -1,27 +1,22 @@
 import {StyleSheet} from 'react-native';
+import { color } from '../../theme';
 
 export const styles = StyleSheet.create({
-    buttonContainer: {
+    container: {
         borderRadius: 8,
+        alignItems: 'center',
         justifyContent: 'center',
-        width: '75%',
-        height: '5%'
     },
     buttonDisabled: {
-        backgroundColor: '#D1D1D1',
+        backgroundColor: color.lightGray
     },
     buttonEnabled: {
-        backgroundColor: '#7199FF',
+        backgroundColor: color.primary
     },
     title: {
+        color: color.white,
         fontSize: 23,
         lineHeight: 34,
-        textAlign: 'center',
-        color: '#FFFFFF',
-    },
-    container: {
-        width: '100%',
-        height: '100%',
-        alignItems: 'center'
+        textAlign: 'center'
     }
 })
