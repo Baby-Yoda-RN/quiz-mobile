@@ -1,7 +1,6 @@
 import React from 'react';
 import {Text, View} from 'react-native';
 import {Button, ProgressBar, Icon} from '../../components';
-// import {color} from '../../theme';
 
 export const DashboardScreen = () => {
   return (

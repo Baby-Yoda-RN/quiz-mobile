@@ -4,3 +4,4 @@ export * from './button/Button';
 export * from './listItem/ListItem';
 export * from './icon/Icon';
 export * from './progressBar/ProgressBar';
+export * from './header/Header';
