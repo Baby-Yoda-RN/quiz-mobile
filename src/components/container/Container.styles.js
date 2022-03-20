@@ -5,6 +5,10 @@ export const style = StyleSheet.create({
         justifyContent: 'flex-start',
     },
     containerCentered: {
+        display: 'flex',
+        flex: 1,
+        flexDirection: 'column',
         justifyContent: 'center',
+        alignItems: 'center',
     },
 });
