@@ -1,10 +1,6 @@
 import React from 'react';
-import {Icon} from '../../components/icon/Icon';
 import {Text, View} from 'react-native';
-import {Header} from '../../components';
-import {Button} from '../../components';
-import {ProgressBar} from '../../components/progressBar/ProgressBar';
-import {color} from '../../theme';
+import {Button, ProgressBar, Icon, Header} from '../../components';
 
 export const DashboardScreen = () => {
   return (
@@ -12,6 +8,7 @@ export const DashboardScreen = () => {
       <Header />
       <ProgressBar percentage={44} />
       {/* Inline styles for example only */}
+
       <Button
         title={'Sample Button'}
         onPress={() => console.log('Sample Button Press')}
