@@ -9,6 +9,7 @@ export const TextInput = ({
   isSensitive = false,
   style:customStyles,
   ...rest
+  
 }) => {
 
   return (
