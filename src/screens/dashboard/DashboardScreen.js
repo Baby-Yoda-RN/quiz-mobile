@@ -1,19 +1,11 @@
 import React from 'react';
-import {Text, View, FlatList} from 'react-native';
-import {
-  Button,
-  ProgressBar,
-  Icon,
-  Header,
-  ListView,
-  ListItem,
-} from '../../components';
+import {View} from 'react-native';
+import {Header, ListView} from '../../components';
 
 export const DashboardScreen = () => {
   return (
     <View>
       <Header />
-
       <ListView />
     </View>
   );
