@@ -33,12 +33,6 @@ export const Item = ({
 
           <View style={style.IconStyle}>
             <Text>></Text>
-            <Icons
-            //name={iconName}
-            //type="FontAwesome5"
-            //size={iconSize}
-            //color={iconColor}
-            />
           </View>
         </View>
       </TouchableOpacity>
