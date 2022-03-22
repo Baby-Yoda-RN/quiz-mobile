@@ -42,7 +42,7 @@ export const ListItem = ({
         )}
       </View>
       <View style={[styles.iconContainer, iconContainerStyle]}>
-        <Icon size={size.lg} name={'chevron-right'} color={color.primary} />
+        <Icon size={size.rg} name={'chevron-right'} color={color.primary} />
       </View>
     </TouchableOpacity>
   );
