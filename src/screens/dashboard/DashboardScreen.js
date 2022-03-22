@@ -1,6 +1,12 @@
 import React from 'react';
-import {Text} from 'react-native';
+import {View} from 'react-native';
+import {Header, ListView} from '../../components';
 
 export const DashboardScreen = () => {
-  return <Text>Initial Screen</Text>;
+  return (
+    <View>
+      <Header />
+      <ListView />
+    </View>
+  );
 };
