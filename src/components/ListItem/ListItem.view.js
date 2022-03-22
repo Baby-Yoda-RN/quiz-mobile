@@ -23,19 +23,15 @@ export const Item = ({
   }
 
   return (
-    <View style={style.container}>
-      <TouchableOpacity onPress={onPress}>
-        <View style={style.AlignmentContainer}>
-          <View style={style.AlignmentContainerText}>
-            <Text style={style.FontStyleSizeTitle}>{Title}</Text>
-            <Text style={style.FontStyleSubTitle}>{subtitle}</Text>
-          </View>
+    <TouchableOpacity style={styles.container}>
+      <View style={styles.TestContainer}>
+        <Text style={styles.FontStyleSizeTitle}>{Title}</Text>
+        <Text style={styles.FontStyleSubTitle}>{subtitle}</Text>
+      </View>
 
-          <View style={style.IconStyle}>
-            <Text>></Text>
-          </View>
-        </View>
-      </TouchableOpacity>
-    </View>
+      <View style={styles.IconStyle}>
+        <Text>></Text>
+      </View>
+    </TouchableOpacity>
   );
 };

@@ -1,40 +1,33 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
+import {size, color} from '../../theme';
 
-export const style = StyleSheet.create({
+export const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#ffffff',
-    borderColor: '#e5e5e5',
-    borderWidth: 2,
-    borderRadius: 8,
-    height: 70,
-  },
-
-  AlignmentContainer: {
+    backgroundColor: color.white,
+    borderRadius: size.sm,
     flex: 0,
     flexDirection: 'row',
   },
 
-  AlignmentContainerText: {
+  TestContainer: {
     flex: 1,
   },
 
-  FontStyleSizeTitle: {
+  Title: {
     fontFamily: 'Poppins',
-    fontWeight: 'normal',
     paddingTop: 11,
     paddingLeft: 18,
-    fontSize: 18,
-    color: '#1E4D58',
+    fontSize: size.rg,
+    color: color.darkGreen,
   },
 
-  FontStyleSubTitle: {
+  SubTitle: {
     fontFamily: 'Poppins',
-    fontWeight: 'normal',
     paddingTop: 5,
     paddingLeft: 18,
-    fontSize: 12,
-    color: '#1E4D58',
+    fontSize: size.rg,
+    color: color.darkGreen,
   },
 
   IconStyle: {
