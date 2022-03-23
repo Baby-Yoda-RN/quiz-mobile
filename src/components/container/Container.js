@@ -21,12 +21,11 @@ export const Container = ({
     return (
       <SafeAreaView
       style={[
-        containerStyle, style.progressIndicator,
+        containerStyle, style.circleProgressIndicator,
         {backgroundColor: background, paddingHorizontal: horizontalPadding},
       ]}
       {...rest}>
         <ProgressIndicator.Circle size={30} indeterminate={true} />
-        {console.log('isLoading=true')}
       </SafeAreaView>
     );
   } else {
@@ -38,7 +37,6 @@ export const Container = ({
       ]}
       {...rest}>
       {children}
-      {console.log('isLoading=false')}
     </SafeAreaView>
   );
 }

@@ -4,7 +4,7 @@ export const style = StyleSheet.create({
     container: {
         justifyContent: 'flex-start',
     },
-    progressIndicator: {
+    circleProgressIndicator: {
         justifyContent: 'center',
         alignItems: 'center',
     },
