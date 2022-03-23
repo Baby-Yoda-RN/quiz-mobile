@@ -14,11 +14,10 @@ export const ProgressBar = ({percentage = 0}) => {
     styles.progressIndicatorBar,
     {width: `${progressValue}%`},
   ];
-  const emptyBar = [styles.emptyBar];
 
   return (
     <View style={styles.container}>
-      <View style={emptyBar}>
+      <View style={styles.emptyBar}>
         <View style={styles.initialBar} />
         <View style={progressIndicatorBar} />
       </View>
