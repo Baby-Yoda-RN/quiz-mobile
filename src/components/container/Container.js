@@ -9,7 +9,7 @@ export const Container = ({
   background,
   isVerticallyCentered = false,
   horizontalPadding = size.lg,
-  isLoading = false,
+  isLoading = true,
   ...rest
 }) => {
   let containerStyle;
@@ -25,7 +25,7 @@ export const Container = ({
         {backgroundColor: background, paddingHorizontal: horizontalPadding},
       ]}
       {...rest}>
-        <ProgressIndicator.Circle size={30} indeterminate={true} />
+        <ProgressIndicator.Circle size={size.xl} indeterminate={true} />
       </SafeAreaView>
     );
   } else {
