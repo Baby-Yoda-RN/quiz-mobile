@@ -6,3 +6,4 @@ export * from './icon/Icon';
 export * from './listItem/ListItem';
 export * from './progressBar/ProgressBar';
 export * from './header/Header';
+export * from './stepsProgress/StepsProgress';
