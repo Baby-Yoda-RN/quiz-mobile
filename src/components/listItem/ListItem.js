@@ -7,7 +7,7 @@ import {size, color} from '../../theme';
 export const ListItem = ({
   title,
   subTitle,
-  MaxTitleLength,
+  maxTitleLength,
   iconName = null,
   iconSize,
   iconColor = color.darkGreen,
