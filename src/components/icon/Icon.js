@@ -1,6 +1,6 @@
 import React from 'react';
 import {View} from 'react-native';
-import Icons from 'react-native-vector-icons/FontAwesome5';
+// import Icons from 'react-native-vector-icons/FontAwesome5';
 
 export const Icon = ({
   iconName,
@@ -11,7 +11,8 @@ export const Icon = ({
 }) => {
   return (
     <View style={containerStyle}>
-      <Icons name={iconName} type="FontAwesome5" {...rest} />
+      {/* <Icons name={iconName} type="FontAwesome5" {...rest} /> */}
+      {null}
     </View>
   );
 };
