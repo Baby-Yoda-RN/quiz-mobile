@@ -4,6 +4,10 @@ export const style = StyleSheet.create({
     container: {
         justifyContent: 'flex-start',
     },
+    progressIndicator: {
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     containerCentered: {
         display: 'flex',
         flex: 1,
