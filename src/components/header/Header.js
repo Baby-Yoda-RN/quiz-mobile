@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View} from 'react-native';
 import {HeaderView} from './Header.view';
 import {Icon, StepsProgress} from '../../components';
 import {size, color} from '../../theme';
