@@ -9,7 +9,7 @@ export const Container = ({
   background,
   isVerticallyCentered = false,
   horizontalPadding = size.lg,
-  isLoading = true,
+  isLoading = false,
   ...rest
 }) => {
   let containerStyle;
