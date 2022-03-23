@@ -29,9 +29,11 @@ export const styles = StyleSheet.create({
     elevation: 3,
   },
   text: {
+    fontFamily: 'Poppins-Regular',
     color: color.darkGreen,
   },
   title: {
+    fontFamily: 'Poppins-Regular',
     fontSize: size.rg,
   },
 });
