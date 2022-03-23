@@ -1,8 +1,6 @@
 import React from 'react';
 import {ListViewInfo} from './ListView.view';
 
-import {FlatList} from 'react-native';
-
 export const ListView = () => {
   const tests = [
     {
