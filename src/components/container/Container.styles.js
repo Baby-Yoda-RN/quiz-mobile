@@ -4,6 +4,10 @@ export const style = StyleSheet.create({
     container: {
         justifyContent: 'flex-start',
     },
+    circleActvityIndicator: {
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     containerCentered: {
         display: 'flex',
         flex: 1,
