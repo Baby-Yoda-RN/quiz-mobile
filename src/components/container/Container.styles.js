@@ -4,7 +4,7 @@ export const style = StyleSheet.create({
     container: {
         justifyContent: 'flex-start',
     },
-    circleProgressIndicator: {
+    circleActvityIndicator: {
         justifyContent: 'center',
         alignItems: 'center',
     },
