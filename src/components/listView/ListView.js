@@ -7,7 +7,7 @@ export const ListView = () => {
 
   const url = 'http://ec2-54-218-161-100.us-west-2.compute.amazonaws.com:3000/api/getalltests';
   const [tests, setData] = useState();
-  const [loading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect( () => {
     setIsLoading(true);
@@ -15,10 +15,9 @@ export const ListView = () => {
       const returnData = data.Items;
       const sortData = returnData.sort((firstItem, secondItem) => firstItem.id - secondItem.id);
       setData(sortData);
-      <Container isLoading = {loading} />
       setIsLoading(false);
     }).catch(error => console.error(error))
   }, []);
 
-  return <Container isLoading = {loading} />, <ListViewInfo data={tests} />;
+  return <Container isLoading = {isLoading} />, <ListViewInfo data={tests} />;
 };
