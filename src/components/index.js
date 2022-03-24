@@ -2,7 +2,6 @@
 export * from './container/Container';
 export * from './listView/ListView';
 export * from './button/Button';
-export * from './icon/Icon';
 export * from './icon/Icons';
 export * from './listItem/ListItem';
 export * from './progressBar/ProgressBar';
