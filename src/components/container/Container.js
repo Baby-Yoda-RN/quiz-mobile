@@ -1,15 +1,15 @@
 import React from 'react';
-import {SafeAreaView} from 'react-native';
+import {SafeAreaView, ActivityIndicator} from 'react-native';
 import {style} from './Container.styles';
 import {size} from '../../theme';
-import * as ProgressIndicator from 'react-native-progress';
+import { color } from '../../theme';
 
 export const Container = ({
   children,
   background,
   isVerticallyCentered = false,
   horizontalPadding = size.lg,
-  isLoading = true,
+  isLoading = false,
   ...rest
 }) => {
   let containerStyle;
@@ -21,11 +21,11 @@ export const Container = ({
     return (
       <SafeAreaView
       style={[
-        containerStyle, style.circleProgressIndicator,
+        containerStyle, style.circleActivityIndicator,
         {backgroundColor: background, paddingHorizontal: horizontalPadding},
       ]}
       {...rest}>
-        <ProgressIndicator.Circle size={size.xl} indeterminate={true} />
+        <ActivityIndicator size='large' color={color.primary} />
       </SafeAreaView>
     );
   } else {
