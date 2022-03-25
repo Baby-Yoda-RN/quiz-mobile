@@ -1,5 +1,5 @@
 import React from 'react';
-import {View} from 'react-native';
+import {View, Text} from 'react-native';
 import {
   Header,
   ListView,
@@ -8,15 +8,12 @@ import {
   Highlighter,
 } from '../../components';
 
-export const HighlightScreen = () => {
+export const DetailScreen = () => {
   return (
     <View>
       <Header />
-      <Container>
-        <ProgressBar />
-      </Container>
+      <ProgressBar />
       <Highlighter />
-      <View></View>
     </View>
   );
 };
