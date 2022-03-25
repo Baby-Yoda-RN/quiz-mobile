@@ -1,24 +1,75 @@
 import React from 'react';
-import {View} from 'react-native';
-import {HeaderView} from './Header.view';
-import {Icon, StepsProgress} from '../../components';
-import {size, color} from '../../theme';
+import {View, Text, SafeAreaView} from 'react-native';
+import {style} from './Header.style';
 
-export const Header = () => {
+export const Header = ({
+  leftElement,
+  rightElement,
+  headerTitle,
+  leftElementContainerStyle,
+  rightElementContainerStyle,
+  headerTitleContainerStyle,
+  safeAreaViewStyle,
+  ...rest
+}) => {
   return (
-    <HeaderView
-      leftElement={
-        <Icon size={size.lg} iconName={'arrow-left'} color={color.primary} />
-      }
-      headerTitle={
-        <View>
-          <StepsProgress />
-        </View>
-      }
-      rightElement={
-        <Icon size={size.lg} iconName={'user-circle'} color={color.primary} />
-      }
-      headerTitleContainerStyle={{color: color.primary}}
-    />
+    <SafeAreaView style={safeAreaViewStyle}>
+      <View style={style.container} {...rest}>
+        {<View>{!!leftElement} </View> &&
+          (React.isValidElement(leftElement) ? (
+            <View
+              style={[
+                style.leftElementContainerStyle,
+                leftElementContainerStyle,
+              ]}>
+              {leftElement}
+            </View>
+          ) : (
+            <Text
+              style={[
+                style.leftElementContainerStyle,
+                leftElementContainerStyle,
+              ]}>
+              {leftElement}
+            </Text>
+          ))}
+        {<View>{!!headerTitle}</View> &&
+          (React.isValidElement(headerTitle) ? (
+            <View
+              style={[
+                style.headerTitleContainerStyle,
+                headerTitleContainerStyle,
+              ]}>
+              {headerTitle}
+            </View>
+          ) : (
+            <Text
+              style={[
+                style.headerTitleContainerStyle,
+                headerTitleContainerStyle,
+              ]}>
+              {headerTitle}
+            </Text>
+          ))}
+        {<View>{!!rightElement}</View> &&
+          (React.isValidElement(rightElement) ? (
+            <View
+              style={[
+                style.rightElementContainerStyle,
+                rightElementContainerStyle,
+              ]}>
+              {rightElement}
+            </View>
+          ) : (
+            <Text
+              style={[
+                style.rightElementContainerStyle,
+                rightElementContainerStyle,
+              ]}>
+              {rightElement}
+            </Text>
+          ))}
+      </View>
+    </SafeAreaView>
   );
 };
