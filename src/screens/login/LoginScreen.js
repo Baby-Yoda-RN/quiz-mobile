@@ -10,6 +10,7 @@ export const LoginScreen = () => {
         placeholder={'Email'}
         style={styles.textInput}/>
     <TextInput 
+        isSensitive={true}
         placeholder={'Email'}
         style={styles.textInput}/>
     <Button  title={'Login'} buttonStyle={styles.button}/>
