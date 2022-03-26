@@ -1,14 +1,15 @@
 import React from 'react';
 import {View} from 'react-native';
-import {styles} from './progressBar.style';
+import {styles} from './ProgressBar.style';
 
 export const ProgressBar = ({percentage = 0}) => {
+  const min = 0;
   const max = 100;
   const progressValue =
-    percentage < 0
-      ? 0
-      : percentage > 100
-      ? 100
+    percentage < min
+      ? min
+      : percentage > max
+      ? max
       : percentage * ((max - 2) / max);
   const progressIndicatorBar = [
     styles.progressIndicatorBar,
