@@ -8,7 +8,6 @@ export const ListViewInfo = ({data, ...rest}) => {
   return (
     <View style={styles.container}>
       <FlatList
-        contentContainerStyle={{padding: size.rg, paddingHorizontal: size.rg}}
         ItemSeparatorComponent={() => <View style={{padding: size.sm}} />}
         data={data}//
         renderItem={({item}) => (
