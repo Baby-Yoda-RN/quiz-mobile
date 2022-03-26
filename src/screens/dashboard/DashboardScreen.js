@@ -12,7 +12,6 @@ import {Container, Header, ListView} from '../../components';
 
 export const DashboardScreen = () => {
 
-  //const url = 'http://ec2-54-218-161-100.us-west-2.compute.amazonaws.com:3000/api/getalltests';
   const [quiz, setData] = useState();
   const [isLoading, setIsLoading] = useState(false);
   
