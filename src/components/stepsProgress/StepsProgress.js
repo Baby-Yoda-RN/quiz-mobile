@@ -7,9 +7,13 @@ export const StepsProgress = ({currentStep = 1, totalSteps = 20}) => {
         throw console.error('Value for totalSteps required');
     }
 
+    if(!currentStep || !Number.isInteger(currentStep)){
+      throw console.error('Value for currentStep required');
+    }
+
     return (
-        <View styles = {styles.textStyle}>
-            <Text>{currentStep}/{totalSteps}</Text>
+        <View styles={styles.container}>
+          <Text style={styles.textStyle}>{currentStep}/{totalSteps}</Text>
         </View>
     );
 }
