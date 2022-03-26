@@ -4,6 +4,7 @@ import {color, size} from '../../theme';
 export const styles = StyleSheet.create({
   textStyle: {
     color: color.darkGreen,
-    fontSize: size.lg,
+    fontSize: size.rg,
+    fontFamily: 'Poppins-Regular',
   },
 });
