@@ -2,6 +2,7 @@ import React from 'react';
 import {View, FlatList, Text} from 'react-native';
 import {Container, Header, ListItem} from '../../components';
 import {size} from '../../theme/size';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 export const DashboardScreen = () => {
   const data = [
@@ -37,7 +38,9 @@ export const DashboardScreen = () => {
 
   return (
     <>
-      <Header leftElement={<Text>Hello</Text>} />
+      <Header
+        leftElement={<Icon name="ios-person" size={30} color="#4F8EF7" />}
+      />
       <Container>
         <FlatList
           ItemSeparatorComponent={() => <View style={{padding: size.sm}} />}
