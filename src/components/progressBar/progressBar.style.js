@@ -1,8 +1,10 @@
+import {StyleSheet} from 'react-native';
 import {color, size} from '../../theme';
 
-export const styles = {
+export const styles = StyleSheet.create({
   container: {
-    margin: size.rg,
+    marginHorizontal: size.xl,
+    marginVertical: size.rg,
     justifyContent: 'center',
   },
   initialBar: {
@@ -25,8 +27,8 @@ export const styles = {
   emptyBar: {
     height: size.sm,
     width: '100%',
-    backgroundColor: color.midGray,
+    backgroundColor: color.darkGray,
     borderRadius: size.sm,
     position: 'absolute',
   },
-};
+});
