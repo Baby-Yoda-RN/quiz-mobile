@@ -1,19 +1,42 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
+import {View, Text, ActivityIndicator} from 'react-native'
 import {Button, Container, TextInput} from '../../components'
-import { color } from '../../theme'
-import {styles } from './loginScreen.styles'
+import {styles} from './loginScreen.styles'
 
 export const LoginScreen = () => {
+
+  const [errors,setErrors] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
+
+  useEffect(()=>{
+    setErrors(['Email error','Password error'])
+  },[])
+
+  const handleLoginButtonPress = () => {
+    setIsLoading(true)
+  }
+
   return (
-  <Container background={color.midGray} containerStyle={styles.container}>
-    <TextInput 
-        placeholder={'Email'}
-        style={styles.textInput}/>
-    <TextInput 
+  <Container>
+    <View style={styles.textInputContainer}>
+      <TextInput 
+        placeholder={'Email'}/>
+      {errors[0] != null && <Text style={styles.error}>{errors[0]}</Text>}
+    </View>
+    <View style={styles.textInputContainer}>
+      <TextInput 
         isSensitive={true}
-        placeholder={'Email'}
-        style={styles.textInput}/>
-    <Button  title={'Login'} buttonStyle={styles.button}/>
+        placeholder={'Password'}/>
+      {errors[1] != null && <Text style={styles.error}>{errors[1]}</Text>}
+    </View>
+    <View style={styles.buttonContainer}>
+      {isLoading?
+        <ActivityIndicator size={'large'}/>
+        :
+        <Button  title={'Login'} buttonStyle={styles.button} onPress={handleLoginButtonPress}/>
+      }
+    </View>
+    
   </Container>
   )
 }
