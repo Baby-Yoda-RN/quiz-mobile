@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import {View} from 'react-native';
+import {View, FlatList, Text} from 'react-native';
 import Axios from 'axios';
-import {Header, Container} from '../../components';
+import {Header, Container,} from '../../components';
 import { ListViewInfo } from '../../components/listView/ListView.view';
+import {size} from '../../theme/size';
 
 export const DashboardScreen = () => {
 
@@ -27,13 +28,12 @@ export const DashboardScreen = () => {
     }
     fetchData();
   }, []);
-
-
   return (
-    <View>
-      <Header />
+    <>
+      <Header leftElement={<Text>Hello</Text>} />
+      <Container isLoading={isLoading}>
       <ListViewInfo data={tests} />
-      <Container isLoading = {isLoading} />
-    </View>
+      </Container>
+    </>
   );
 };
