@@ -2,36 +2,41 @@ import {StyleSheet} from 'react-native';
 import {size, color} from '../../theme';
 
 export const styles = StyleSheet.create({
-  listItemContainer: {
+  Container: {
     backgroundColor: color.white,
-    borderRadius: size.sm,
+    borderRadius: 8, //size.sm,
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: size.rg,
     paddingVertical: size.sm,
     alignItems: 'center',
+
+    //Box Shadow
+    shadowColor: color.lightGray2, //color
+    shadowOffset: {
+      width: 0, //offset x
+      height: 4, //offset y
+    },
+    shadowRadius: 4, //Blur radius
+
+    shadowOpacity: 0.16, //Opacity
+    elevation: 1, //on lower Android APIs, use the elevation property
   },
-  infoContainer: {
+  TextContainer: {
     flex: 1,
   },
-  iconContainer: {
+  IconContainer: {
     paddingHorizontal: size.sm,
   },
-  boxShadow: {
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.22,
-    shadowRadius: 2.22,
 
-    elevation: 3,
-  },
-  text: {
+  Title: {
+    fontFamily: 'Poppins-Regular',
+    fontSize: size.rg,
     color: color.darkGreen,
   },
-  title: {
-    fontSize: size.rg,
+
+  SubTitle: {
+    fontFamily: 'Poppins-Regular',
+    color: color.darkGreen,
   },
 });
