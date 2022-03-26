@@ -1,14 +1,8 @@
-<<<<<<< HEAD
 import React, {useState, useEffect} from 'react';
 import {Text} from 'react-native';
 import {Header, Container,} from '../../components';
 import { ListViewInfo } from '../../components/listView/ListView.view';
 import {quizAPI} from '../../configuration/Axios.configuration';
-=======
-import React from 'react';
-import {View} from 'react-native';
-import {Container, Header, ListView} from '../../components';
->>>>>>> main
 
 export const DashboardScreen = () => {
 
@@ -33,20 +27,11 @@ export const DashboardScreen = () => {
     fetchData();
   }, []);
   return (
-<<<<<<< HEAD
     <>
       <Header leftElement={<Text>Hello</Text>} />
       <Container isLoading={isLoading}>
       <ListViewInfo data={quiz} />
       </Container>
     </>
-=======
-    <View>
-      <Header />
-      <Container>
-        <ListView />
-      </Container>
-    </View>
->>>>>>> main
   );
 };
