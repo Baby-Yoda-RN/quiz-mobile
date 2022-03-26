@@ -20,8 +20,8 @@ import {color, size} from '../../theme';
 export const Icon = ({
   iconName,
   iconSet,
-  iconSize,
-  iconColor,
+  iconSize = size.lg,
+  iconColor = color.primary,
   customIconContainerStyle,
   ...rest
 }) => {
