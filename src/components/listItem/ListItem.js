@@ -14,7 +14,7 @@ export const ListItem = ({
 }) => {
   if (title == '' || title == null) {
     title = 'Test 1';
-  } else if (title.length > MaxTitleLength) {
+  } else if (title.length > maxTitleLength) {
     title = '...';
   }
 
