@@ -2,8 +2,8 @@ import {color, size} from '../../theme';
 
 export const styles = {
   container: {
-    margin: size.rg,
-    justifyContent: 'center',
+    margin: size.lg,
+    paddingHorizontal: size.rg,
   },
   initialBar: {
     height: size.sm,
@@ -25,7 +25,7 @@ export const styles = {
   emptyBar: {
     height: size.sm,
     width: '100%',
-    backgroundColor: color.midGray,
+    backgroundColor: color.darkGray,
     borderRadius: size.sm,
     position: 'absolute',
   },

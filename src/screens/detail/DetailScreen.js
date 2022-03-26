@@ -10,10 +10,10 @@ import {
 
 export const DetailScreen = () => {
   return (
-    <View>
+    <Container>
       <Header />
       <ProgressBar />
       <Highlighter />
-    </View>
+    </Container>
   );
 };
