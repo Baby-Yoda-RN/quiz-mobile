@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text} from 'react-native';
+import {Text, View} from 'react-native';
 import SyntaxHighlighter from 'react-native-syntax-highlighter';
 import {size, color} from '../../theme';
 
@@ -20,9 +20,8 @@ export const Highlighter = (language = 'css', newCodeString, ...rest) => {
   return (
     <SyntaxHighlighter
       language="css"
-      styles="dark"
       fontSize={size.rg}
-      highlighter="prism"
+      highlighter="hljs"
       {...rest}>
       {codeString}
     </SyntaxHighlighter>
