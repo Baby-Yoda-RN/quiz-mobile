@@ -14,7 +14,9 @@
     "react-native": "0.67.3",
     "react-native-progress": "^5.0.0",
     "react-native-svg": "^12.3.0",
-    "react-native-vector-icons": "^9.1.0"
+    "react-native-syntax-highlighter": "^2.1.0",
+    "react-native-vector-icons": "^9.1.0",
+    "react-syntax-highlighter": "^15.5.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
