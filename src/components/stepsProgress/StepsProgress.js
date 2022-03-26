@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Text} from 'react-native';
+import { styles } from './StepsProgress.style';
 
 export const StepsProgress = ({currentStep = 1, totalSteps = 20}) => {
     if(!totalSteps || !Number.isInteger(totalSteps)){
@@ -7,7 +8,7 @@ export const StepsProgress = ({currentStep = 1, totalSteps = 20}) => {
     }
 
     return (
-        <View>
+        <View styles = {styles.textStyle}>
             <Text>{currentStep}/{totalSteps}</Text>
         </View>
     );
