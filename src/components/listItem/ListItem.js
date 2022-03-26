@@ -1,8 +1,6 @@
 import {View, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {styles} from './ListItem.styles';
-import {Icon} from '../';
-import {size, color} from '../../theme';
 
 export const ListItem = ({
   title,
@@ -42,7 +40,7 @@ export const ListItem = ({
         )}
       </View>
       <View style={[styles.iconContainer, iconContainerStyle]}>
-        <Icon size={size.rg} name={'chevron-right'} color={color.primary} />
+        {/* <Icon size={size.rg} name={'chevron-right'} color={color.primary} /> */}
       </View>
     </TouchableOpacity>
   );
