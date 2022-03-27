@@ -1,50 +1,47 @@
-import React from 'react';
-import {View, FlatList, Text} from 'react-native';
-import {Container, Header, ListItem} from '../../components';
-import {size} from '../../theme/size';
-import Icon from 'react-native-vector-icons/Ionicons';
+import React, {useState, useEffect} from 'react';
+import {View, Text, FlatList} from 'react-native';
+import {Header, Container, Icon, ListItem} from '../../components';
+import {ListViewInfo} from '../../components/listView/ListView.view';
+import {quizAPI} from '../../configuration/Axios.configuration';
+import {color, size} from '../../theme';
 
 export const DashboardScreen = () => {
-  const data = [
-    {
-      title: 'Test 1',
-      subtitle: 'Test one is about this',
-    },
-    {
-      title: 'Test 2',
-      subtitle: 'Test two is about this',
-    },
-    {
-      title: 'Test 3',
-      subtitle: 'Test three is about this',
-    },
-    {
-      title: 'Test 4',
-      subtitle: 'Test four is about this',
-    },
-    {
-      title: 'Test 5',
-      subtitle: 'Test five is about this',
-    },
-    {
-      title: 'Test 6',
-      subtitle: 'Test six is about this',
-    },
-    {
-      title: 'Test 7',
-      subtitle: 'Test seven is about this',
-    },
-  ];
+  const [quiz, setData] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        quizAPI.get().then(({data}) => {
+          const sortData = data.sort(
+            (firstItem, secondItem) => firstItem.id - secondItem.id,
+          );
+          setData(sortData);
+          setIsLoading(false);
+        });
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
   return (
     <>
       <Header
-        leftElement={<Icon name="ios-person" size={30} color="#4F8EF7" />}
+        rightElement={
+          <Icon
+            iconSet={'MaterialCommunityIcons'}
+            iconName={'account-circle-outline'}
+          />
+        }
       />
       <Container>
         <FlatList
           ItemSeparatorComponent={() => <View style={{padding: size.sm}} />}
-          data={data}
+          data={quiz}
           renderItem={({item}) => (
             <ListItem title={item.title} subTitle={item.subtitle} />
           )}
