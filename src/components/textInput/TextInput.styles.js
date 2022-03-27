@@ -7,7 +7,7 @@ import {color, size} from '../../theme'
 export const styles = StyleSheet.create({
   textInputStyles: {
     backgroundColor: color.white,
-    borderColor: color.lightGray,
+    borderColor: color.darkGray,
     borderWidth: 1,
     borderRadius: size.sm,
     paddingHorizontal: 17, 
