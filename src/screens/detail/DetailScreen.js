@@ -27,13 +27,18 @@ export const DetailScreen = () => {
         }
       />
       <Container>
-        <ProgressBar />
+        <ProgressBar style={{marginVertical: size.rg}} />
         <Highlighter />
         <TextInput
-          placeholder="Email"
+          style={{marginTop: size.lg}}
+          placeholder="Answer"
           placeholderTextColor={color.placeHolderGray}
         />
-        <Button title="Next" />
+        <Button
+          isDisabled
+          buttonStyle={{paddingVertical: size.sm, marginVertical: size.rg}}
+          title="Next"
+        />
       </Container>
     </>
   );
