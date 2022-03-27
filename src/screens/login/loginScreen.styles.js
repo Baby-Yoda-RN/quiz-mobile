@@ -16,6 +16,12 @@ export const styles = StyleSheet.create({
     error:{
         color:'tomato',
         marginLeft:size.rg,
+        marginTop:size.xs,
         fontSize:size.rg
+    },
+    container:{
+        flex:1,
+        justifyContent:'center',
+        marginHorizontal:size.rg,
     }
 })

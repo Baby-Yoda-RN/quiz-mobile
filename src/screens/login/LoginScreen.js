@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import {View, Text, ActivityIndicator} from 'react-native'
 import {Button, Container, TextInput} from '../../components'
+import { color } from '../../theme'
 import {styles} from './loginScreen.styles'
 
 export const LoginScreen = () => {
@@ -9,7 +10,7 @@ export const LoginScreen = () => {
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(()=>{
-    setErrors(['Email error','Password error'])
+    setErrors(['Invalid Email','Password is required'])
   },[])
 
   const handleLoginButtonPress = () => {
@@ -17,7 +18,7 @@ export const LoginScreen = () => {
   }
 
   return (
-  <Container>
+    <View style={styles.container}>
     <View style={styles.textInputContainer}>
       <TextInput 
         placeholder={'Email'}/>
@@ -31,12 +32,11 @@ export const LoginScreen = () => {
     </View>
     <View style={styles.buttonContainer}>
       {isLoading?
-        <ActivityIndicator size={'large'}/>
+        <ActivityIndicator size={'large'} color={color.primary}/>
         :
         <Button  title={'Login'} buttonStyle={styles.button} onPress={handleLoginButtonPress}/>
-      }
+  }
     </View>
-    
-  </Container>
+  </View>
   )
 }

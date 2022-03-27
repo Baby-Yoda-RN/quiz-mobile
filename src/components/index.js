@@ -1,4 +1,4 @@
-// export * from './textInput/TextInput';
+export * from './textInput/TextInput';
 export * from './container/Container';
 export * from './listView/ListView';
 export * from './button/Button';
