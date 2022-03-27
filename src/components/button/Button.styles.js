@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   buttonDisabled: {
-    backgroundColor: color.lightGray,
+    backgroundColor: color.darkGray,
   },
   buttonEnabled: {
     backgroundColor: color.primary,
