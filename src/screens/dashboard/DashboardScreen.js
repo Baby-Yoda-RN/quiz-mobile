@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, FlatList} from 'react-native';
-import {Header, Container, Icon, ListItem} from '../../components';
-import {ListViewInfo} from '../../components/listView/ListView.view';
+import {Header, Container, Icon, ListItem, ListView} from '../../components';
+// import {ListViewInfo} from '../../components/listView/ListView.view';
 import {quizAPI} from '../../configuration/Axios.configuration';
 import {color, size} from '../../theme';
 
@@ -13,7 +13,7 @@ export const DashboardScreen = () => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        quizAPI.get().then(({data}) => {
+        quizAPI.get('/getalltests').then(({data}) => {
           const sortData = data.sort(
             (firstItem, secondItem) => firstItem.id - secondItem.id,
           );
@@ -39,13 +39,7 @@ export const DashboardScreen = () => {
         }
       />
       <Container>
-        <FlatList
-          ItemSeparatorComponent={() => <View style={{padding: size.sm}} />}
-          data={quiz}
-          renderItem={({item}) => (
-            <ListItem title={item.title} subTitle={item.subtitle} />
-          )}
-        />
+        <ListView data={quiz}></ListView>
       </Container>
     </>
   );
