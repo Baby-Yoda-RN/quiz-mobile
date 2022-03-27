@@ -1,8 +1,7 @@
 import React from 'react';
 import {View, FlatList, Text} from 'react-native';
-import {Container, Header, ListItem} from '../../components';
+import {Container, Header, ListItem, Icon} from '../../components';
 import {size} from '../../theme/size';
-import Icon from 'react-native-vector-icons/Ionicons';
 
 export const DashboardScreen = () => {
   const data = [
@@ -39,7 +38,12 @@ export const DashboardScreen = () => {
   return (
     <>
       <Header
-        leftElement={<Icon name="ios-person" size={30} color="#4F8EF7" />}
+        rightElement={
+          <Icon
+            iconSet={'MaterialCommunityIcons'}
+            iconName={'account-circle-outline'}
+          />
+        }
       />
       <Container>
         <FlatList

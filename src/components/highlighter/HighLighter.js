@@ -20,6 +20,7 @@ export const Highlighter = (language = 'css', newCodeString, ...rest) => {
   return (
     <SyntaxHighlighter
       language="css"
+      fontFamily="Poppins-Regular"
       fontSize={size.rg}
       highlighter="hljs"
       {...rest}>

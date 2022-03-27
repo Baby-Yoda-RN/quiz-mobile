@@ -39,7 +39,7 @@ export const ListItem = ({
             color={iconColor}
           />
         )}
-        {iconName === null && <Text>></Text>}
+        <Icon iconSet={'AntDesign'} iconName={'right'} iconSize={size.rg} />
       </View>
     </TouchableOpacity>
   );

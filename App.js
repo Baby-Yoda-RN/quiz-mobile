@@ -4,5 +4,5 @@ import {DetailScreen} from './src/screens/detail/DetailScreen';
 import {LoginScreen} from './src/screens/login/LoginScreen';
 
 export const App = () => {
-  return <DetailScreen />;
+  return <DashboardScreen />;
 };
