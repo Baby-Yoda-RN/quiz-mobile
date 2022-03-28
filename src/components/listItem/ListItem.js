@@ -1,46 +1,46 @@
 import {View, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {styles} from './ListItem.styles';
+import {Icon} from '../../components';
+import {size, color} from '../../theme';
 
 export const ListItem = ({
   title,
   subTitle,
-  titleContainerStyle,
-  subTitleContainerStyle,
-  listItemContainerStyle,
-  titleStyle,
-  subTitleStyle,
-  iconContainerStyle,
-  ...rest
+  maxTitleLength,
+  iconName = null,
+  iconSize,
+  iconColor = color.darkGreen,
 }) => {
+  if (title == '' || title == null) {
+    title = 'Test 1';
+  } else if (title.length > maxTitleLength) {
+    title = '...';
+  }
+
   return (
-    <TouchableOpacity
-      style={[
-        styles.listItemContainer,
-        styles.boxShadow,
-        listItemContainerStyle,
-      ]}
-      {...rest}>
-      <View style={styles.infoContainer}>
-        {!!title && (
-          <View style={titleContainerStyle}>
-            <Text
-              numberOfLines={1}
-              style={[styles.text, styles.title, titleStyle]}>
-              {title}
-            </Text>
-          </View>
-        )}
-        {!!subTitle && (
-          <View style={subTitleContainerStyle}>
-            <Text numberOfLines={1} style={[styles.text, subTitleStyle]}>
-              {subTitle}
-            </Text>
-          </View>
-        )}
+    <TouchableOpacity style={styles.Container}>
+      <View style={styles.TextContainer}>
+        <View>
+          <Text style={styles.Title}>{title}</Text>
+        </View>
+
+        <View>
+          <Text style={styles.SubTitle}>{subTitle}</Text>
+        </View>
       </View>
-      <View style={[styles.iconContainer, iconContainerStyle]}>
-        {/* <Icon size={size.rg} name={'chevron-right'} color={color.primary} /> */}
+
+      <View style={[styles.IconContainer]}>
+        {!!iconName && (
+          <Icon
+            name={iconName}
+            type="FontAwesome5"
+            size={iconSize}
+            color={iconColor}
+          />
+        )}
+
+        <Icon iconSet={'AntDesign'} iconName={'right'} iconSize={size.rg} />
       </View>
     </TouchableOpacity>
   );

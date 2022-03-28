@@ -2,7 +2,7 @@ import React from 'react';
 import {View} from 'react-native';
 import {styles} from './ProgressBar.style';
 
-export const ProgressBar = ({percentage = 0}) => {
+export const ProgressBar = ({style, percentage = 0, ...rest}) => {
   const min = 0;
   const max = 100;
   const progressValue =
@@ -17,7 +17,7 @@ export const ProgressBar = ({percentage = 0}) => {
   ];
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       <View style={styles.emptyBar}>
         <View style={styles.initialBar} />
         <View style={progressIndicatorBar} />
