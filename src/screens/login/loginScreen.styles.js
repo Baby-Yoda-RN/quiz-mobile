@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
         marginBottom:size.rg,
     },
     button:{
-        marginVertical:size.rg,
+        marginVertical:size.sm,
         paddingVertical:size.rg
     },
     buttonContainer:{
@@ -14,14 +14,24 @@ export const styles = StyleSheet.create({
         marginTop:4,
     },
     error:{
+        fontFamily:'Poppins-Regular',
         color:'tomato',
         marginLeft:size.rg,
         marginTop:size.xs,
-        fontSize:size.rg
     },
     container:{
         flex:1,
         justifyContent:'center',
-        marginHorizontal:size.rg,
+        marginHorizontal:size.lg,
+    },
+    textInput:{
+        paddingVertical:size.rg,
+        fontFamily:'Poppins-Regular',
+        fontSize:size.rg
+    },
+    errorContainer:{
+        marginVertical:size.lg,
+        left:-size.rg,
+        alignItems:'center',
     }
 })
