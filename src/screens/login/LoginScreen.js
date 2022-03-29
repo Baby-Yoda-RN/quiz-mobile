@@ -31,28 +31,31 @@ export const LoginScreen = () => {
       }));
     }
     if (errors.emailError === '' && errors.passwordError === '') {
-      setIsLoading(true);
-      quizAPI
-        .post('/login', {
-          TableName: 'Users',
-          Email: values.email,
-          Password: values.password,
-        })
-        .then(function (response) {
-          if (response.data === 'Wrong Email or Password.') {
-            setErrors(prevState => ({
-              ...prevState,
-              credentialError: response.data,
-            }));
-          } else {
-            // Temporary alert until navigation is handled
-            alert('Login Successfull');
-          }
-        })
-        .catch(function (error) {
-          console.log('Error: ', error);
-        });
-      setIsLoading(false);
+      const fetchLoginData = async () => {
+        setIsLoading(true);
+        quizAPI
+          .post('/login', {
+            TableName: 'Users',
+            Email: values.email,
+            Password: values.password,
+          })
+          .then(response => {
+            if (response.data === 'Wrong Email or Password.') {
+              setErrors(prevState => ({
+                ...prevState,
+                credentialError: response.data,
+              }));
+            } else {
+              // Temporary alert until navigation is handled
+              alert('Login Successful');
+            }
+          })
+          .catch(error => {
+            console.log('Error: ', error);
+          });
+        setIsLoading(false);
+      };
+      fetchLoginData();
     }
   };
 
