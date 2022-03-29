@@ -51,7 +51,7 @@ export const LoginScreen = () => {
             }
           })
           .catch(error => {
-            console.log('Error: ', error);
+            console.error(error);
           });
         setIsLoading(false);
       };
