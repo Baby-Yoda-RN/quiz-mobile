@@ -14,7 +14,7 @@ export const TextInput = ({
     <NativeTextInput
       style={[styles.textInputStyles, customStyles]}
       secureTextEntry={isSensitive}
-      placeholderTextColor={color.lightGray}
+      placeholderTextColor={color.darkGray}
       {...rest}
     />
   );
