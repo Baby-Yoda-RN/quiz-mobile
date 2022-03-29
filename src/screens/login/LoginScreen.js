@@ -1,8 +1,13 @@
 import React, {useState, useEffect} from 'react';
+import {quizAPI} from '../../configuration/Axios.configuration';
 import {LoginScreenView} from './LoginScreen.view';
 
 export const LoginScreen = () => {
-  const [errors, setErrors] = useState({emailError: '', passwordError: ''});
+  const [errors, setErrors] = useState({
+    emailError: '',
+    passwordError: '',
+    credentialError: '',
+  });
   const [values, setValues] = useState({email: '', password: ''});
   const [isLoading, setIsLoading] = useState(false);
 
@@ -25,8 +30,31 @@ export const LoginScreen = () => {
         passwordError: 'Password is required',
       }));
     }
-    if(!errors.emailError && !errors.passwordError){
-        //If there's no errors we can fetch the login api and check if the credentials are correct
+    if (errors.emailError === '' && errors.passwordError === '') {
+      console.log('No errors');
+      setIsLoading(true);
+      quizAPI
+        .post('/login', {
+          TableName: 'Users',
+          Email: values.email,
+          Password: values.password,
+        })
+        .then(function (response) {
+          console.log('Response: ', response);
+          if (response.data === 'Wrong Email or Password.') {
+            setErrors(prevState => ({
+              ...prevState,
+              credentialError: response.data,
+            }));
+          } else {
+            // Temporary alert until navigation is handled
+            alert('Login Successfull');
+          }
+        })
+        .catch(function (error) {
+          console.log('Error: ', error);
+        });
+      setIsLoading(false);
     }
   };
 

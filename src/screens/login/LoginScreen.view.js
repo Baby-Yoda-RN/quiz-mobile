@@ -13,12 +13,11 @@ export const LoginScreenView = ({
 }) => {
   return (
     <View style={styles.container}>
-      {/* 
-      You can show this error if the credential got
       <View style={styles.errorContainer}>
-        <Text style={styles.error}>Wrong credentials</Text>
-      </View> 
-      */}
+        {errors.credentialError !== '' && (
+          <Text style={styles.error}>{errors.credentialError}</Text>
+        )}
+      </View>
       <View style={styles.textInputContainer}>
         <TextInput
           style={styles.textInput}
