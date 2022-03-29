@@ -31,7 +31,6 @@ export const LoginScreen = () => {
       }));
     }
     if (errors.emailError === '' && errors.passwordError === '') {
-      console.log('No errors');
       setIsLoading(true);
       quizAPI
         .post('/login', {
@@ -40,7 +39,6 @@ export const LoginScreen = () => {
           Password: values.password,
         })
         .then(function (response) {
-          console.log('Response: ', response);
           if (response.data === 'Wrong Email or Password.') {
             setErrors(prevState => ({
               ...prevState,
