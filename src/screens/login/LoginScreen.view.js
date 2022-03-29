@@ -1,47 +1,39 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {View, Text, ActivityIndicator} from 'react-native';
 import {Button, Container, TextInput} from '../../components';
 import {color} from '../../theme';
 import {styles} from './loginScreen.styles';
 
-export const LoginScreenView = () => {
-  const [errors, setErrors] = useState({emailError:'',passwordError:''});
-  const [values, setValues] = useState({email:'',password:''})
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleLoginButtonPress = () => {
-    setErrors({emailError:'',passwordError:''})
-    if(!values.email){
-      setErrors(prevState => ({
-        ...prevState,
-        emailError:'Email is required'
-      }))
-    }
-    if(!values.password){
-      setErrors(prevState => ({
-        ...prevState,
-        passwordError:'Password is required'
-      }))
-    }
-    console.log(errors)
-  };
-
+export const LoginScreenView = ({
+  errors,
+  values,
+  setValues,
+  isLoading,
+  handleLoginButtonPress,
+}) => {
   return (
     <View style={styles.container}>
-    <View style={styles.errorContainer}>
-      <Text style={styles.error}>Wrong credentials</Text>
-    </View>
+      {/* 
+      You can show this error if the credential got
+      <View style={styles.errorContainer}>
+        <Text style={styles.error}>Wrong credentials</Text>
+      </View> 
+      */}
       <View style={styles.textInputContainer}>
-        <TextInput 
-          style={styles.textInput} 
+        <TextInput
+          style={styles.textInput}
           placeholder={'Email'}
           value={values.email}
-          onChangeText={email => setValues(prevState => ({
-            ...prevState,
-            email,
-          }))}
+          onChangeText={email =>
+            setValues(prevState => ({
+              ...prevState,
+              email,
+            }))
+          }
         />
-        {errors.emailError !== '' && <Text style={styles.error}>{errors.emailError}</Text>}
+        {errors.emailError !== '' && (
+          <Text style={styles.error}>{errors.emailError}</Text>
+        )}
       </View>
       <View style={styles.textInputContainer}>
         <TextInput
@@ -49,12 +41,16 @@ export const LoginScreenView = () => {
           isSensitive={true}
           placeholder={'Password'}
           value={values.password}
-          onChangeText={password => setValues(prevState => ({
-            ...prevState,
-            password,
-          }))}
+          onChangeText={password =>
+            setValues(prevState => ({
+              ...prevState,
+              password,
+            }))
+          }
         />
-        {errors.passwordError !== '' && <Text style={styles.error}>{errors.passwordError}</Text>}
+        {errors.passwordError !== '' && (
+          <Text style={styles.error}>{errors.passwordError}</Text>
+        )}
       </View>
       <View style={styles.buttonContainer}>
         {isLoading ? (
