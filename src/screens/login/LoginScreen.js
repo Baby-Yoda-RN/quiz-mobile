@@ -33,7 +33,7 @@ export const LoginScreen = () => {
     if (errors.emailError === '' && errors.passwordError === '') {
       const fetchLoginData = async () => {
         setIsLoading(true);
-        quizAPI
+        await quizAPI
           .post('/login', {
             TableName: 'Users',
             Email: values.email,
