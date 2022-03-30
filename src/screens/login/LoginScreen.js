@@ -1,19 +1,71 @@
-import React from 'react'
-import {Button, Container, TextInput} from '../../components'
-import { color } from '../../theme'
-import {styles } from './loginScreen.styles'
+import React, {useState, useEffect} from 'react';
+import {quizAPI} from '../../configuration/Axios.configuration';
+import {LoginScreenView} from './LoginScreen.view';
 
 export const LoginScreen = () => {
+  const [errors, setErrors] = useState({
+    emailError: '',
+    passwordError: '',
+    credentialError: '',
+  });
+  const [values, setValues] = useState({email: '', password: ''});
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleLoginButtonPress = () => {
+    setErrors({emailError: '', passwordError: ''});
+    if (!values.email) {
+      setErrors(prevState => ({
+        ...prevState,
+        emailError: 'Email is required',
+      }));
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
+      setErrors(prevState => ({
+        ...prevState,
+        emailError: 'Invalid email',
+      }));
+    }
+    if (!values.password) {
+      setErrors(prevState => ({
+        ...prevState,
+        passwordError: 'Password is required',
+      }));
+    }
+    if (errors.emailError === '' && errors.passwordError === '') {
+      const fetchLoginData = async () => {
+        setIsLoading(true);
+        await quizAPI
+          .post('/login', {
+            TableName: 'Users',
+            Email: values.email,
+            Password: values.password,
+          })
+          .then(response => {
+            if (response.data === 'Wrong Email or Password.') {
+              setErrors(prevState => ({
+                ...prevState,
+                credentialError: response.data,
+              }));
+            } else {
+              // Temporary alert until navigation is handled
+              alert('Login Successful');
+            }
+          })
+          .catch(error => {
+            console.error(error);
+          });
+        setIsLoading(false);
+      };
+      fetchLoginData();
+    }
+  };
+
   return (
-  <Container background={color.midGray} containerStyle={styles.container}>
-    <TextInput 
-        placeholder={'Email'}
-        style={styles.textInput}/>
-    <TextInput 
-        isSensitive={true}
-        placeholder={'Email'}
-        style={styles.textInput}/>
-    <Button  title={'Login'} buttonStyle={styles.button}/>
-  </Container>
-  )
-}
+    <LoginScreenView
+      errors={errors}
+      values={values}
+      setValues={setValues}
+      isLoading={isLoading}
+      handleLoginButtonPress={handleLoginButtonPress}
+    />
+  );
+};
