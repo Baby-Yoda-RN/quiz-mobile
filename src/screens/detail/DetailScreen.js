@@ -14,6 +14,9 @@ import {
 import {color, size} from '../../theme';
 
 export const DetailScreen = () => {
+  const [answer, setAnswer] = useState('');
+  const onPress = () => {};
+
   return (
     <>
       <Header
@@ -32,8 +35,10 @@ export const DetailScreen = () => {
         <TextInput
           placeholder="Email"
           placeholderTextColor={color.placeHolderGray}
+          value={answer}
+          setValue={setAnswer}
         />
-        <Button title="Next" />
+        <Button title="Next" onPress={onPress} disabled={!answer.length} />
       </Container>
     </>
   );
