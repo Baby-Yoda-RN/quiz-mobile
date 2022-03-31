@@ -30,13 +30,16 @@ export const DetailScreen = () => {
         <ProgressBar style={{marginVertical: size.rg}} />
         <Highlighter />
         <TextInput
-          style={{marginTop: size.lg}}
+          customStyles={{marginTop: size.lg, height: size.xl}}
           placeholder="Answer"
           placeholderTextColor={color.placeHolderGray}
         />
         <Button
           isDisabled
-          buttonStyle={{paddingVertical: size.sm, marginVertical: size.rg}}
+          buttonStyle={{
+            marginVertical: size.rg,
+            height: size.xl,
+          }}
           title="Next"
         />
       </Container>
