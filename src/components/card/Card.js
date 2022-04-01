@@ -13,7 +13,7 @@ export const Card = ({
 }) => {
   if (score > 10) {
     textMessage = 'Congratulations! \n You passed the test';
-    customScoreStyle = {color: color.darkGreen};
+    customScoreStyle = {color: color.midGreen};
   } else {
     textMessage = "Sorry! \n You didn't pass the test";
     customScoreStyle = {color: color.darkRed};

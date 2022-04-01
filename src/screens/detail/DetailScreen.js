@@ -38,6 +38,8 @@ export const DetailScreen = () => {
           isDisabled
           buttonStyle={{paddingVertical: size.sm, marginVertical: size.rg}}
           title="Next"
+          // results screen or next question depends on current index
+          onPress={() => console.log('Next question or results')}
         />
       </Container>
     </>
