@@ -37,23 +37,23 @@ export const App = () => {
   const authMemo = React.useMemo(
     () => ({
       signIn: async (values) => {
-        let data = getLoginData(values)
-        console.log(data)
+        const data = await getLoginData(values)
         if(data.error){
           return data
         }
         try {
-          await AsyncStorage.setItem(TOKEN_NAME, data.tokenValue);
-        } catch (e) {
-          // saving error
+          await AsyncStorage.setItem(TOKEN_NAME, data.token);
+        } catch (error) {
+            console.log(error)
         }
-        dispatch({type: 'SIGN_IN', token: data.tokenValue});
+        dispatch({type: 'SIGN_IN', token: data.token});
+        return data
       },
       signOut: async () => {
         try {
-          await AsyncStorage.setItem(TOKEN_NAME, null);
-        } catch (e) {
-          // saving error
+          await AsyncStorage.removeItem(TOKEN_NAME);
+        } catch (error) {
+            console.log(error)
         }
         dispatch({type: 'SIGN_OUT'});
       },

@@ -11,10 +11,10 @@ export const LoginScreen = () => {
     passwordError: '',
     credentialError: '',
   });
-  const [values, setValues] = useState({email: 'myemail@gmai.com', password: 'wrongPassword'});
+  const [values, setValues] = useState({email: 'First.Last@gmail.com', password: 'First.Last@gmail.com'});
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleLoginButtonPress = () => {
+  const handleLoginButtonPress = async () => {
     setErrors({emailError: '', passwordError: ''});
     if (!values.email) {
       setErrors(prevState => ({
@@ -34,13 +34,11 @@ export const LoginScreen = () => {
       }));
     }
     if (errors.emailError === '' && errors.passwordError === '') {
-      console.log('im here')
-      let response;
-      response = signIn(values)
+      const response = await signIn(values)
       if(response.error){
         setErrors(prevState => ({
           ...prevState,
-          passwordError: response.error
+          credentialError: response.error
         }))
       }
     }
