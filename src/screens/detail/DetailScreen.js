@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text} from 'react-native';
 import {
   Button,
@@ -14,6 +14,10 @@ import {
 import {color, size} from '../../theme';
 
 export const DetailScreen = () => {
+  const [text, onChangeText] = useState('');
+
+  const onPress = () => {};
+
   return (
     <>
       <Header
@@ -33,12 +37,17 @@ export const DetailScreen = () => {
           style={{marginTop: size.lg}}
           placeholder="Answer"
           placeholderTextColor={color.placeHolderGray}
+          value={text}
+          onChangeText={onChangeText}
         />
+
         <Button
-          isDisabled
+          title={'Next'}
+          onPress={onPress}
           buttonStyle={{paddingVertical: size.sm, marginVertical: size.rg}}
-          title="Next"
+          isDisabled={!text.length}
         />
+
       </Container>
     </>
   );
