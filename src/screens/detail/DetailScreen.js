@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import {
   Button,
   Header,
@@ -15,19 +15,20 @@ import {color, size} from '../../theme';
 
 export const DetailScreen = () => {
   const [text, onChangeText] = useState('');
-
   const onPress = () => {};
 
   return (
     <>
       <Header
-        leftElement={<Icon iconSet={'AntDesign'} iconName={'arrowleft'} />}
+        leftElement={
+          //added this will remove comment
+        <TouchableOpacity onPress={() => {console.log("Go to test screen")}}>
+          <Icon iconSet={'AntDesign'} iconName={'arrowleft'} />
+        </TouchableOpacity>
+        }
         headerTitle={<StepsProgress />}
         rightElement={
-          <Icon
-            iconSet={'MaterialCommunityIcons'}
-            iconName={'account-circle-outline'}
-          />
+          <Icon iconSet={'MaterialCommunityIcons'} iconName={'account-circle-outline'}/>
         }
       />
       <Container>
