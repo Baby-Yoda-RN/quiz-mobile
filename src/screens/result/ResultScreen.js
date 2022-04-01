@@ -6,6 +6,7 @@ import {styles} from './ResultScreen.styles';
 
 export const ResultScreen = ({navigation}) => {
   const [numAnswersCorrect, setNumAnswersCorrect] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   // Use when context is set up
   // const {userAnswer} = useContext(QuizContext);
@@ -14,7 +15,7 @@ export const ResultScreen = ({navigation}) => {
   const dummyData = {
     userAnswers: [
       {id: 100, userAnswer: "I don't know."},
-      {id: 101, userAnswer: 'False'},
+      {id: 101, userAnswer: 'True'},
       {id: 102, userAnswer: 'Central Processing Unit'},
       {id: 103, userAnswer: 'Amazon'},
       {id: 104, userAnswer: 'GigaHerz'},
@@ -36,16 +37,19 @@ export const ResultScreen = ({navigation}) => {
     ],
   };
 
+  // Replace 'dummyData' with 'userAnswer' with context
   useEffect(() => {
     const checkTestAnswers = () => {
+      setIsLoading(true);
       quizAPI
         .post('/checkanswers', dummyData)
         .then(response => {
-          setNumAnswersCorrect(20);
+          setNumAnswersCorrect(response.data * 20);
         })
         .catch(error => {
           console.error(error);
-        });
+        })
+        .finally(() => setIsLoading(false));
     };
     checkTestAnswers();
   }, []);
@@ -61,11 +65,11 @@ export const ResultScreen = ({navigation}) => {
         }
       />
       <Container background={color.midGray} containerStyle={styles.container}>
-        <Card score={numAnswersCorrect} />
+        <Card score={numAnswersCorrect} isLoading={isLoading} />
         <Button
           title={'Go to Dashboard'}
           buttonStyle={styles.button}
-          onPress={() => console.log('Go to Dashboard')} // () => navigation.push('Dashboard') when global nav is set up
+          onPress={() => navigation.push('Dashboard')}
         />
       </Container>
     </>
