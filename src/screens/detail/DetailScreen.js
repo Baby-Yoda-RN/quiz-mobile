@@ -14,7 +14,7 @@ import {
 import {quizAPI} from '../../configuration/Axios.configuration';
 import {color, size} from '../../theme';
 
-export const DetailScreen = () => {
+export const DetailScreen = ({navigation}) => {
   //BLOCKER: will receive questionCategory or testId from Michael
   //const {questionCategory} = useContext(QuizContext);
 
@@ -65,8 +65,10 @@ export const DetailScreen = () => {
 
       setCurrentAnswer();
 
-      if (currentQuestionIndex >= questions.length - 1)
+      if (currentQuestionIndex >= questions.length - 1){
         setCurrentQuestionIndex(questions.length - 1);
+        navigation.push('Result');
+      }
       else setCurrentQuestionIndex(currentQuestionIndex + 1);
     }
   };
