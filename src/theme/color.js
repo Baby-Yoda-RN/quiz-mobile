@@ -4,8 +4,7 @@ export const color = {
   lightGray2: '#CECECE',
   midGray: '#E5E5E5',
   darkGray: '#D1D1D1',
-
-
+  darkRed: '#BC230E',
   placeHolderGray: '#A3A3A3',
   darkGreen: '#1E4D58',
   primary: '#7199FF',
