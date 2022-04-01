@@ -14,7 +14,9 @@ public class MainActivity extends ReactActivity {
     return "dev_quiz_mobile";
   }
 
-  @protected void onCreate(Bundle savedInstanceState){
+  @Override
+  protected void onCreate(Bundle savedInstanceState){
     super.onCreate(null);
   }
+  
 }
