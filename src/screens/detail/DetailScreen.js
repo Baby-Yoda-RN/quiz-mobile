@@ -31,10 +31,11 @@ export const DetailScreen = () => {
         }
       />
       <Container>
-        <ProgressBar />
+        <ProgressBar style={{marginVertical: size.rg}} />
         <Highlighter />
         <TextInput
-          placeholder="Email"
+          style={{marginTop: size.lg}}
+          placeholder="Answer"
           placeholderTextColor={color.placeHolderGray}
           value={text}
           onChangeText={onChangeText}
@@ -46,6 +47,7 @@ export const DetailScreen = () => {
           buttonStyle={{paddingVertical: size.sm, marginVertical: size.rg}}
           isDisabled={!text.length}
         />
+
       </Container>
     </>
   );
