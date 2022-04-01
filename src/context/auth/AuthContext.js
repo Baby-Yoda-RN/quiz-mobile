@@ -1,2 +1,10 @@
 import React from 'react';
-export const AuthContext = React.createContext();
+import { initialState } from './AuthReducer';
+
+const AuthContextData = {
+    state:initialState,
+    signIn:()=>{},
+    signOut:()=>{},
+}
+
+export const AuthContext = React.createContext(AuthContextData);
