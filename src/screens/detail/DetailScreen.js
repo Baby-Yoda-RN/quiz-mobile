@@ -40,7 +40,12 @@ export const DetailScreen = () => {
           onChangeText={onChangeText}
         />
 
-        <Button title={'Next'} onPress={onPress} isDisabled={!text.length} />
+        <Button
+          title={'Next'}
+          onPress={onPress}
+          buttonStyle={{paddingVertical: size.sm, marginVertical: size.rg}}
+          isDisabled={!text.length}
+        />
       </Container>
     </>
   );
