@@ -13,7 +13,7 @@ import {
 } from '../../components';
 import {color, size} from '../../theme';
 
-export const DetailScreen = () => {
+export const DetailScreen = ({navigation}) => {
   const [text, onChangeText] = useState('');
   const onPress = () => {};
 
@@ -21,8 +21,7 @@ export const DetailScreen = () => {
     <>
       <Header
         leftElement={
-          //added this will remove comment
-        <TouchableOpacity onPress={() => {console.log("Go to test screen")}}>
+        <TouchableOpacity onPress={() => {navigation.push('Dashboard')}}>
           <Icon iconSet={'AntDesign'} iconName={'arrowleft'} />
         </TouchableOpacity>
         }
