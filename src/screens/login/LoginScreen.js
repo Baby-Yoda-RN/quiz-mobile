@@ -1,17 +1,20 @@
-import React, {useState, useEffect} from 'react';
-import {quizAPI} from '../../configuration/Axios.configuration';
+import React, {useState} from 'react';
 import {LoginScreenView} from './LoginScreen.view';
+import { AuthContext } from '../../context/auth/AuthContext';
 
 export const LoginScreen = () => {
+
+  const {signIn} = React.useContext(AuthContext);
+
   const [errors, setErrors] = useState({
     emailError: '',
     passwordError: '',
     credentialError: '',
   });
-  const [values, setValues] = useState({email: '', password: ''});
+  const [values, setValues] = useState({email: 'First.Last@gmail.com', password: 'First.Last@gmail.com'});
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleLoginButtonPress = () => {
+  const handleLoginButtonPress = async () => {
     setErrors({emailError: '', passwordError: ''});
     if (!values.email) {
       setErrors(prevState => ({
@@ -31,31 +34,13 @@ export const LoginScreen = () => {
       }));
     }
     if (errors.emailError === '' && errors.passwordError === '') {
-      const fetchLoginData = async () => {
-        setIsLoading(true);
-        await quizAPI
-          .post('/login', {
-            TableName: 'Users',
-            Email: values.email,
-            Password: values.password,
-          })
-          .then(response => {
-            if (response.data === 'Wrong Email or Password.') {
-              setErrors(prevState => ({
-                ...prevState,
-                credentialError: response.data,
-              }));
-            } else {
-              // Temporary alert until navigation is handled
-              alert('Login Successful');
-            }
-          })
-          .catch(error => {
-            console.error(error);
-          });
-        setIsLoading(false);
-      };
-      fetchLoginData();
+      const response = await signIn(values)
+      if(response.error){
+        setErrors(prevState => ({
+          ...prevState,
+          credentialError: response.error
+        }))
+      }
     }
   };
 
