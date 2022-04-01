@@ -3,9 +3,11 @@ import Axios from 'axios';
 let token;
 
 if(!token){
+  /*
   (async () => {
-    //token = LocalStorage.getData('AUTH_TOKEN');
+    token = LocalStorage.getData('AUTH_TOKEN');
   })();
+  */
   token = 'AUTH_TOKEN';
 }
 
