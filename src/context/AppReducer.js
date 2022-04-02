@@ -1,7 +1,9 @@
-export const initialState = {
+import {authInitialState} from './auth/AuthState';
+
+export const globalInitialState = {
   isLoading: true,
-  isSignout: false,
-  token: null,
+  auth: authInitialState,
+  quiz: null,
 };
 
 export const reducer = (prevState, action) => {
@@ -9,20 +11,24 @@ export const reducer = (prevState, action) => {
     case 'RESTORE_TOKEN':
       return {
         ...prevState,
-        token: action.token,
+        auth: {token: action.token},
         isLoading: false,
       };
     case 'SIGN_IN':
       return {
         ...prevState,
-        isSignout: false,
-        token: action.token,
+        auth: {
+          token: action.token,
+          isSignout: false,
+        },
       };
     case 'SIGN_OUT':
       return {
         ...prevState,
-        isSignout: true,
-        token: false,
+        auth: {
+          token: null,
+          isSignout: true,
+        },
       };
   }
 };
