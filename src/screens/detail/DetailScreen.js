@@ -1,6 +1,7 @@
 import React, {useState, useContext, useEffect} from 'react';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import {ActivityIndicator} from 'react-native';
-import {QuizContext} from '../../context';
+import {AppContext} from '../../context/AppContext';
 import {
   Button,
   Header,
@@ -14,28 +15,34 @@ import {
 import {quizAPI} from '../../configuration/Axios.configuration';
 import {color, size} from '../../theme';
 
-export const DetailScreen = ({navigation}) => {
-  //BLOCKER: will receive questionCategory or testId from Michael
-  //const {questionCategory} = useContext(QuizContext);
-
+export const DetailScreen = () => {
   const [questions, setQuestions] = useState();
   const [userAnswers, setUserAnswers] = useState();
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [currentQuestion, setCurrentQuestion] = useState();
   const [currentAnswer, setCurrentAnswer] = useState();
+  const [progress, setProgress] = useState(currentIndex + 1);
+  const [progressPercent, setProgressPercent] = useState();
+
+  const navigation = useNavigation();
+  const {
+    params: {id: testId},
+  } = useRoute();
 
   const fetchData = async (
     quizAPI,
-    // change 'getquestions/computer' to questionCategory end point after receive from blocker
     endPoint = 'getquestions/computer',
     setIsLoading,
     setQuestions,
+    setCurrentQuestion,
   ) => {
     setIsLoading(true);
     try {
       await quizAPI.get(endPoint).then(({data}) => {
         setQuestions(data);
         setIsLoading(false);
+        setCurrentQuestion(data[currentIndex].question);
       });
     } catch (error) {
       console.error(error);
@@ -45,42 +52,58 @@ export const DetailScreen = ({navigation}) => {
   };
 
   useEffect(() => {
-    fetchData(quizAPI, undefined, setIsLoading, setQuestions);
+    fetchData(
+      quizAPI,
+      `getquestions/${testId.toString()}`,
+      setIsLoading,
+      setQuestions,
+      setCurrentQuestion,
+    );
   }, []);
 
   const goToNextQuestion = (
     questions,
-    currentQuestionIndex,
-    setCurrentQuestionIndex,
+    currentIndex,
+    setCurrentIndex,
+    setCurrentQuestion,
   ) => {
-    if (currentQuestionIndex < questions.length) {
-      userAnswers
-        ? setUserAnswers(prev => [
-            ...prev,
-            {id: questions[currentQuestionIndex].id, userAnswer: currentAnswer},
-          ])
-        : setUserAnswers([
-            {id: questions[currentQuestionIndex].id, userAnswer: currentAnswer},
-          ]);
+    if (userAnswers) {
+      setUserAnswers(previousAnswers => [
+        ...previousAnswers,
+        {id: questions[currentIndex].id, userAnswer: currentAnswer},
+      ]);
+    } else {
+      setUserAnswers([
+        {id: questions[currentIndex].id, userAnswer: currentAnswer},
+      ]);
+    }
 
-      setCurrentAnswer();
+    const nextIndex = currentIndex + 1;
 
-      if (currentQuestionIndex >= questions.length - 1){
-        setCurrentQuestionIndex(questions.length - 1);
-        navigation.push('Result');
-      }
-      else setCurrentQuestionIndex(currentQuestionIndex + 1);
+    setCurrentAnswer();
+
+    setCurrentIndex(nextIndex);
+
+    setProgress(nextIndex + 1);
+
+    setProgressPercent(((progress + 1) / questions.length) * 100);
+
+    if (nextIndex < questions.length) {
+      setCurrentQuestion(questions[nextIndex].question);
+    }
+
+    if (nextIndex >= questions.length) {
+      navigation.push('Result');
     }
   };
 
   return (
-    <QuizContext.Provider
-      value={{userAnswers, questions, currentQuestionIndex}}>
+    <AppContext.Provider value={{userAnswers, questions, currentIndex}}>
       <Header
         leftElement={<Icon iconSet={'AntDesign'} iconName={'arrowleft'} />}
         headerTitle={
           <StepsProgress
-            currentStep={currentQuestionIndex + 1}
+            currentStep={progress}
             totalSteps={questions && questions.length}
           />
         }
@@ -98,17 +121,9 @@ export const DetailScreen = ({navigation}) => {
           <>
             <ProgressBar
               style={{marginVertical: size.rg}}
-              percentage={
-                questions &&
-                userAnswers &&
-                (userAnswers.length / questions.length) * 100
-              }
+              percentage={progressPercent}
             />
-            <Highlighter
-              newCodeString={
-                questions && questions[currentQuestionIndex].question
-              }
-            />
+            <Highlighter newCodeString={currentQuestion} />
             <TextInput
               style={{marginTop: size.lg}}
               placeholder="Answer"
@@ -128,14 +143,15 @@ export const DetailScreen = ({navigation}) => {
               onPress={() => {
                 goToNextQuestion(
                   questions,
-                  currentQuestionIndex,
-                  setCurrentQuestionIndex,
+                  currentIndex,
+                  setCurrentIndex,
+                  setCurrentQuestion,
                 );
               }}
             />
           </>
         )}
       </Container>
-    </QuizContext.Provider>
+    </AppContext.Provider>
   );
 };
