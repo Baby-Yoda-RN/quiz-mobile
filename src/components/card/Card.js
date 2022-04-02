@@ -12,14 +12,6 @@ export const Card = ({
   isLoading = false,
   ...rest
 }) => {
-  if (score > 15) {
-    textMessage = 'Congratulations! \n You passed the test';
-    customScoreStyle = {color: color.midGreen};
-  } else {
-    textMessage = "Sorry! \n You didn't pass the test";
-    customScoreStyle = {color: color.darkRed};
-  }
-
   return (
     <View style={[styles.container, customContainerSyle]} {...rest}>
       <View>

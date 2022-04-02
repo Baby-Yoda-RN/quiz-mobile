@@ -1,10 +1,13 @@
+import {useNavigation} from '@react-navigation/native';
 import React, {useState, useEffect} from 'react';
 import {Button, Container, Header, Icon, Card} from '../../components';
 import {quizAPI} from '../../configuration/Axios.configuration';
 import {color} from '../../theme';
 import {styles} from './ResultScreen.styles';
 
-export const ResultScreen = ({navigation}) => {
+export const ResultScreen = () => {
+  const navigation = useNavigation();
+
   const [numAnswersCorrect, setNumAnswersCorrect] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -54,6 +57,16 @@ export const ResultScreen = ({navigation}) => {
     checkTestAnswers();
   }, []);
 
+  let textMessage, customScoreStyle;
+
+  if (numAnswersCorrect > 15) {
+    textMessage = 'Congratulations! \n You passed the test';
+    customScoreStyle = {color: color.midGreen};
+  } else {
+    textMessage = "Sorry! \n You didn't pass the test";
+    customScoreStyle = {color: color.darkRed};
+  }
+
   return (
     <>
       <Header
@@ -65,7 +78,12 @@ export const ResultScreen = ({navigation}) => {
         }
       />
       <Container background={color.midGray} containerStyle={styles.container}>
-        <Card score={numAnswersCorrect} isLoading={isLoading} />
+        <Card
+          score={numAnswersCorrect}
+          isLoading={isLoading}
+          textMessage={textMessage}
+          customScoreStyle={customScoreStyle}
+        />
         <Button
           title={'Go to Dashboard'}
           buttonStyle={styles.button}
