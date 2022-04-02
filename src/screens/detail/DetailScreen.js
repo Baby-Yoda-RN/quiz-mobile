@@ -34,7 +34,7 @@ export const DetailScreen = () => {
         <ProgressBar style={{marginVertical: size.rg}} />
         <Highlighter />
         <TextInput
-          style={{marginTop: size.lg}}
+          customStyles={{marginTop: size.lg, height: size.xl}}
           placeholder="Answer"
           placeholderTextColor={color.placeHolderGray}
           value={text}
@@ -44,7 +44,10 @@ export const DetailScreen = () => {
         <Button
           title={'Next'}
           onPress={onPress}
-          buttonStyle={{paddingVertical: size.sm, marginVertical: size.rg}}
+          buttonStyle={{
+            marginVertical: size.rg,
+            height: size.xl,
+          }}
           isDisabled={!text.length}
         />
       </Container>
