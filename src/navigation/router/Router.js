@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {AuthContext} from '../../context/auth/AuthContext';
+import {AppContext} from '../../context/AppContext';
 import {NavigationContainer} from '@react-navigation/native';
 
 import {AppNavigation} from '../../navigation/appNavigation/AppNavigation'
@@ -7,7 +7,7 @@ import {AuthNavigation} from '../authNavigation/AuthNavigation';
 import { SplashScreen } from '../../screens/splash/SplashScreen'
 
 export const Router = () => {
-  const {state} = useContext(AuthContext);
+  const {state} = useContext(AppContext);
 
   if(state.isLoading){
     return (
@@ -17,7 +17,7 @@ export const Router = () => {
 
   return (
     <NavigationContainer>
-      {state.token?(
+      {state.auth.token?(
         <AppNavigation/>
       ):(
         <AuthNavigation/>

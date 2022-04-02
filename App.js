@@ -1,11 +1,11 @@
 import React from 'react';
 import { Router } from './src/navigation/router/Router';
-import {AuthProvider} from './src/context/auth/AuthProvider';
+import {AppProvider} from './src/context/AppContext';
 
 export const App = () => {
   return (
-    <AuthProvider>
+    <AppProvider>
       <Router/>
-    </AuthProvider>
+    </AppProvider>
   );
 };
