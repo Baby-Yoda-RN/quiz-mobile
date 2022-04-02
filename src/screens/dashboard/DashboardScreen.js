@@ -50,7 +50,7 @@ export const DashboardScreen = () => {
               title={item.title}
               subTitle={item.subtitle}
               onPress={() => {
-                navigation.push('Detail', item.id);
+                navigation.push('Detail', {id: item.id});
               }}
             />
           )}
