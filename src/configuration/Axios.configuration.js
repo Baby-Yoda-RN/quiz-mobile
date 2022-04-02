@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import {getData, storeData} from '../utilities/localStorage';
+import {getData} from '../utilities/localStorage';
 
 let token;
 
