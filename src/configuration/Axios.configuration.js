@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import {getData, storeData} from '../utilities/localStorage';
+import {getData} from '../utilities/localStorage';
 
 let token;
 
@@ -7,13 +7,13 @@ if(!token){
   (async () => {
     try{
     token = await getData('AUTH_TOKEN');
+    console.log(token)
     }catch(error){
       console.log(error);
     }
 
   })();
 }
-
 
 export const quizAPI = Axios.create({
   baseURL:
