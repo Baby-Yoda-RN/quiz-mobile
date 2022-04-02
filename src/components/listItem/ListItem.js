@@ -11,6 +11,7 @@ export const ListItem = ({
   iconName = null,
   iconSize,
   iconColor = color.darkGreen,
+  ...rest
 }) => {
   if (title == '' || title == null) {
     title = 'Test 1';
@@ -19,7 +20,7 @@ export const ListItem = ({
   }
 
   return (
-    <TouchableOpacity style={styles.Container}>
+    <TouchableOpacity style={styles.Container} {...rest}>
       <View style={styles.TextContainer}>
         <View>
           <Text style={styles.Title}>{title}</Text>
