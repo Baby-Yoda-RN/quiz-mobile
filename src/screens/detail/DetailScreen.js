@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import {
   Button,
   Header,
@@ -13,8 +14,9 @@ import {
 } from '../../components';
 import {color, size} from '../../theme';
 
-export const DetailScreen = ({navigation}) => {
+export const DetailScreen = () => {
   const [text, onChangeText] = useState('');
+  const navigation = useNavigation();
 
   return (
     <>
