@@ -26,7 +26,7 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   IconContainer: {
-    paddingHorizontal: size.sm,
+    paddingHorizontal: size.xs,
   },
 
   Title: {
