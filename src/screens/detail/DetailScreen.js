@@ -15,7 +15,6 @@ import {color, size} from '../../theme';
 
 export const DetailScreen = ({navigation}) => {
   const [text, onChangeText] = useState('');
-  const onPress = () => {};
 
   return (
     <>
