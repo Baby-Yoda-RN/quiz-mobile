@@ -1,4 +1,4 @@
-import React, {useState, useContext, useEffect} from 'react';
+import React, {useState, useContext, useEffect, useReducer} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {ActivityIndicator} from 'react-native';
 import {AppContext} from '../../context/AppContext';
@@ -17,32 +17,32 @@ import {color, size} from '../../theme';
 
 export const DetailScreen = () => {
   const [questions, setQuestions] = useState();
-  const [userAnswers, setUserAnswers] = useState();
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [userAnswers, setUserAnswers] = useState([]);
+  const [currentQuestion, setCurrentQuestion] = useState({
+    index: 0,
+    question: '',
+    answer: '',
+    progress: 0,
+  });
   const [isLoading, setIsLoading] = useState(false);
-  const [currentQuestion, setCurrentQuestion] = useState();
-  const [currentAnswer, setCurrentAnswer] = useState();
-  const [progress, setProgress] = useState(currentIndex + 1);
-  const [progressPercent, setProgressPercent] = useState();
 
   const navigation = useNavigation();
   const {
     params: {id: testId},
   } = useRoute();
 
-  const fetchData = async (
-    quizAPI,
-    endPoint = 'getquestions/computer',
-    setIsLoading,
-    setQuestions,
-    setCurrentQuestion,
-  ) => {
+  const fetchQuestions = async (endPoint, states, actions) => {
+    const [setQuestions, setIsLoading, setCurrentQuestion] = actions;
+
     setIsLoading(true);
     try {
       await quizAPI.get(endPoint).then(({data}) => {
         setQuestions(data);
         setIsLoading(false);
-        setCurrentQuestion(data[currentIndex].question);
+        setCurrentQuestion({
+          ...states,
+          question: data[states.index || 0].question,
+        });
       });
     } catch (error) {
       console.error(error);
@@ -52,58 +52,46 @@ export const DetailScreen = () => {
   };
 
   useEffect(() => {
-    fetchData(
-      quizAPI,
-      `getquestions/${testId.toString()}`,
-      setIsLoading,
+    fetchQuestions(`getquestions/${testId}`, currentQuestion, [
       setQuestions,
+      setIsLoading,
       setCurrentQuestion,
-    );
+    ]);
   }, []);
 
-  const goToNextQuestion = (
-    questions,
-    currentIndex,
-    setCurrentIndex,
-    setCurrentQuestion,
-  ) => {
-    if (userAnswers) {
-      setUserAnswers(previousAnswers => [
-        ...previousAnswers,
-        {id: questions[currentIndex].id, userAnswer: currentAnswer},
-      ]);
-    } else {
-      setUserAnswers([
-        {id: questions[currentIndex].id, userAnswer: currentAnswer},
-      ]);
-    }
-
-    const nextIndex = currentIndex + 1;
-
-    setCurrentAnswer();
-
-    setCurrentIndex(nextIndex);
-
-    setProgress(nextIndex + 1);
-
-    setProgressPercent(((progress + 1) / questions.length) * 100);
-
-    if (nextIndex < questions.length) {
-      setCurrentQuestion(questions[nextIndex].question);
-    }
-
-    if (nextIndex >= questions.length) {
+  const goToNextQuestion = (data, states, action) => {
+    let currentIndex;
+    let lastIndex = data.length - 1;
+    if (states.index + 1 > lastIndex) {
+      currentIndex = lastIndex;
       navigation.push('Result');
-    }
+    } else currentIndex = states.index + 1;
+
+    action({
+      ...states,
+      index: currentIndex,
+      progress: ((currentIndex + 1) / data.length) * 100,
+      question: data[currentIndex].question,
+      answer: '',
+    });
+  };
+
+  const saveUserAnswers = (input, states, action) => {
+    let currentAnswer = {
+      id: questions[states.length].id,
+      userAnswer: input,
+    };
+
+    action([...states, currentAnswer]);
   };
 
   return (
-    <AppContext.Provider value={{userAnswers, questions, currentIndex}}>
+    <AppContext.Provider value={{userAnswers, questions}}>
       <Header
         leftElement={<Icon iconSet={'AntDesign'} iconName={'arrowleft'} />}
         headerTitle={
           <StepsProgress
-            currentStep={progress}
+            currentStep={currentQuestion.index + 1}
             totalSteps={questions && questions.length}
           />
         }
@@ -121,31 +109,32 @@ export const DetailScreen = () => {
           <>
             <ProgressBar
               style={{marginVertical: size.rg}}
-              percentage={progressPercent}
+              percentage={currentQuestion.progress}
             />
-            <Highlighter newCodeString={currentQuestion} />
+            <Highlighter newCodeString={currentQuestion.question} />
             <TextInput
               style={{marginTop: size.lg}}
               placeholder="Answer"
               placeholderTextColor={color.placeHolderGray}
-              onChangeText={newText => setCurrentAnswer(newText)}
-              value={currentAnswer}
+              onChangeText={newText =>
+                setCurrentQuestion({...currentQuestion, answer: newText})
+              }
+              value={currentQuestion.answer}
             />
             <Button
-              isDisabled={
-                !currentAnswer ||
-                (userAnswers && userAnswers.length === questions.length)
-                  ? true
-                  : false
-              }
+              isDisabled={currentQuestion.answer.length > 0 ? false : true}
               buttonStyle={{paddingVertical: size.sm, marginVertical: size.rg}}
               title="Next"
               onPress={() => {
                 goToNextQuestion(
                   questions,
-                  currentIndex,
-                  setCurrentIndex,
+                  currentQuestion,
                   setCurrentQuestion,
+                );
+                saveUserAnswers(
+                  currentQuestion.answer,
+                  userAnswers,
+                  setUserAnswers,
                 );
               }}
             />
