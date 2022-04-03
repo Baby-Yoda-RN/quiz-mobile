@@ -59,12 +59,12 @@ export const DetailScreen = () => {
     ]);
   }, []);
 
-  const goToNextQuestion = (data, states, action) => {
+  const goToNextQuestion = (data, states, action, userAnswers) => {
     let currentIndex;
     let lastIndex = data.length - 1;
     if (states.index + 1 > lastIndex) {
       currentIndex = lastIndex;
-      navigation.push('Result');
+      navigation.push('Result', userAnswers);
     } else currentIndex = states.index + 1;
 
     action({
@@ -130,6 +130,7 @@ export const DetailScreen = () => {
                   questions,
                   currentQuestion,
                   setCurrentQuestion,
+                  userAnswers,
                 );
                 saveUserAnswers(
                   currentQuestion.answer,
