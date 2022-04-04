@@ -1,7 +1,7 @@
 import React, {isValidElement} from 'react';
 import {View, SafeAreaView, Text, TouchableOpacity} from 'react-native';
 import {style} from './Header.style';
-import {Icon} from '../icon';
+import {Icon} from '../icon/Icon';
 import {isString, isEmpty} from 'lodash';
 
 export const Header = ({
