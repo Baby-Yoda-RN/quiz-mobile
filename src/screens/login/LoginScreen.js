@@ -1,17 +1,16 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {LoginScreenView} from './LoginScreen.view';
-import { AppContext } from '../../context/AppContext';
+import {AppContext} from '../../context/AppContext';
 
 export const LoginScreen = () => {
-
-  const {signIn} = React.useContext(AppContext);
+  const {signIn} = useContext(AppContext);
 
   const [errors, setErrors] = useState({
     emailError: '',
     passwordError: '',
     credentialError: '',
   });
-  const [values, setValues] = useState({email: 'First.Last@gmail.com', password: 'First.Last@gmail.com'});
+  const [values, setValues] = useState({email: '', password: ''});
   const [isLoading, setIsLoading] = useState(false);
 
   const handleLoginButtonPress = async () => {
@@ -34,12 +33,12 @@ export const LoginScreen = () => {
       }));
     }
     if (errors.emailError === '' && errors.passwordError === '') {
-      const response = await signIn(values)
-      if(response.error){
+      const response = await signIn(values);
+      if (response.error) {
         setErrors(prevState => ({
           ...prevState,
-          credentialError: response.error
-        }))
+          credentialError: response.error,
+        }));
       }
     }
   };
