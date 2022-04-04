@@ -1,11 +1,11 @@
-import React, {useState, useEffect} from 'react';
-import {View, Text, FlatList} from 'react-native';
+import React, {useState, useEffect, useLayoutEffect} from 'react';
+import {View, Text, FlatList, TouchableHighlight, Alert} from 'react-native';
 import {Header, Container, Icon, ListItem, ListView} from '../../components';
 // import {ListViewInfo} from '../../components/listView/ListView.view';
 import {quizAPI} from '../../configuration/Axios.configuration';
 import {color, size} from '../../theme';
 
-export const DashboardScreen = () => {
+export const DashboardScreen = ({navigation}) => {
   const [quiz, setData] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -28,16 +28,40 @@ export const DashboardScreen = () => {
     };
     fetchData();
   }, []);
+
+  const LogoutAlert = () =>
+    Alert.alert('Logout?', '', [
+      {
+        text: 'Cancel',
+        onPress: () => {},
+        style: 'cancel',
+      },
+      {text: 'OK', onPress: () => {}},
+    ]);
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerStyle: {
+        backgroundColor: color.lightGray,
+      },
+      headerRight: () => (
+        <Header
+          rightElement={
+            <TouchableHighlight onPress={LogoutAlert}>
+              <Icon
+                iconSet={'MaterialCommunityIcons'}
+                iconName={'account-circle-outline'}
+              />
+            </TouchableHighlight>
+          }
+        />
+      ),
+      headerTitle: '',
+    });
+  }, [navigation]);
+
   return (
     <>
-      <Header
-        rightElement={
-          <Icon
-            iconSet={'MaterialCommunityIcons'}
-            iconName={'account-circle-outline'}
-          />
-        }
-      />
       <Container>
         <ListView data={quiz}></ListView>
       </Container>
