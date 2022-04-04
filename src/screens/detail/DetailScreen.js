@@ -58,11 +58,12 @@ export const DetailScreen = () => {
   };
 
   useEffect(() => {
-    fetchQuestions(
-      [quizAPI, `getquestions/${testId}`],
-      currentQuestion,
-      [setQuestions, setIsLoading, setCurrentQuestion, setLastIndex],
-    );
+    fetchQuestions([quizAPI, `getquestions/${testId}`], currentQuestion, [
+      setQuestions,
+      setIsLoading,
+      setCurrentQuestion,
+      setLastIndex,
+    ]);
   }, []);
 
   const goToNextQuestion = (data, states, setStates, constants) => {
@@ -71,36 +72,35 @@ export const DetailScreen = () => {
     const [setCurrentQuestion, setUserAnswers] = setStates;
     const lastIndex = constants;
 
-    let currentIndex;
+    if (userAnswers.length <= lastIndex) {
+      let currentIndex;
 
-    if (currentQuestion.index + 1 > lastIndex) {
-      currentIndex = lastIndex;
-    } else currentIndex = currentQuestion.index + 1;
+      if (currentQuestion.index + 1 > lastIndex) {
+        currentIndex = lastIndex;
+      } else currentIndex = currentQuestion.index + 1;
 
-    let tempAnswer = {
-      id: userAnswers.length <= lastIndex && questions[userAnswers.length].id,
-      userAnswer: currentQuestion.answer,
-    };
+      let tempAnswer = {
+        id: userAnswers.length <= lastIndex && questions[userAnswers.length].id,
+        userAnswer: currentQuestion.answer,
+      };
 
-    setCurrentQuestion({
-      ...currentQuestion,
-      index: currentIndex,
-      progress: (currentIndex / questions.length) * 100,
-      question:
-        currentIndex < questions.length && questions[currentIndex].question,
-      answer: '',
-    });
+      setCurrentQuestion({
+        ...currentQuestion,
+        index: currentIndex,
+        progress: (currentIndex / questions.length) * 100,
+        question:
+          currentIndex < questions.length && questions[currentIndex].question,
+        answer: '',
+      });
 
-    setUserAnswers([...userAnswers, tempAnswer]);
+      setUserAnswers([...userAnswers, tempAnswer]);
+    }
   };
 
   const goToResultScreen = (navigation, location, data) => {
     const userAnswers = data;
     navigation.push(location, userAnswers);
   };
-
-  if (userAnswers.length === lastIndex + 1)
-    goToResultScreen(navigation, 'Result', userAnswers);
 
   return (
     <AppContext.Provider value={{userAnswers, questions}}>
@@ -129,28 +129,48 @@ export const DetailScreen = () => {
               percentage={currentQuestion.progress}
             />
             <Highlighter newCodeString={currentQuestion.question} />
-            <TextInput
-              style={{marginTop: size.lg}}
-              placeholder="Answer"
-              placeholderTextColor={color.placeHolderGray}
-              onChangeText={newText => {
-                setCurrentQuestion({...currentQuestion, answer: newText});
-              }}
-              value={currentQuestion.answer}
-            />
-            <Button
-              isDisabled={currentQuestion.answer.length > 0 ? false : true}
-              buttonStyle={{paddingVertical: size.sm, marginVertical: size.rg}}
-              title="Next"
-              onPress={() => {
-                goToNextQuestion(
-                  questions,
-                  [currentQuestion, userAnswers],
-                  [setCurrentQuestion, setUserAnswers],
-                  lastIndex,
-                );
-              }}
-            />
+            {userAnswers.length > lastIndex ? (
+              <Button
+                isDisabled={false}
+                buttonStyle={{
+                  paddingVertical: size.sm,
+                  marginVertical: size.rg,
+                }}
+                title="Submit ?"
+                onPress={() => {
+                  if (userAnswers.length > lastIndex)
+                    goToResultScreen(navigation, 'Result', userAnswers);
+                }}
+              />
+            ) : (
+              <>
+                <TextInput
+                  style={{marginTop: size.lg}}
+                  placeholder="Answer"
+                  placeholderTextColor={color.placeHolderGray}
+                  onChangeText={newText => {
+                    setCurrentQuestion({...currentQuestion, answer: newText});
+                  }}
+                  value={currentQuestion.answer}
+                />
+                <Button
+                  isDisabled={currentQuestion.answer.length > 0 ? false : true}
+                  buttonStyle={{
+                    paddingVertical: size.sm,
+                    marginVertical: size.rg,
+                  }}
+                  title="Next"
+                  onPress={() => {
+                    goToNextQuestion(
+                      questions,
+                      [currentQuestion, userAnswers],
+                      [setCurrentQuestion, setUserAnswers],
+                      lastIndex,
+                    );
+                  }}
+                />
+              </>
+            )}
           </>
         )}
       </Container>
