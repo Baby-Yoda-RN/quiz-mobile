@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {LoginScreenView} from './LoginScreen.view';
 import {AppContext} from '../../context/AppContext';
 
 export const LoginScreen = () => {
-  const {signIn} = React.useContext(AppContext);
+  const {signIn} = useContext(AppContext);
 
   const [errors, setErrors] = useState({
     emailError: '',
