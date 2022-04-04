@@ -1,4 +1,4 @@
-import React, {useState, useContext, useEffect, useReducer} from 'react';
+import React, {useState, useEffect} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {ActivityIndicator} from 'react-native';
 import {AppContext} from '../../context/AppContext';
@@ -16,7 +16,9 @@ import {quizAPI} from '../../configuration/Axios.configuration';
 import {color, size} from '../../theme';
 
 export const DetailScreen = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [questions, setQuestions] = useState();
+  const [lastIndex, setLastIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState({
     index: 0,
@@ -24,25 +26,29 @@ export const DetailScreen = () => {
     answer: '',
     progress: 0,
   });
-  const [isLoading, setIsLoading] = useState(false);
 
   const navigation = useNavigation();
   const {
     params: {id: testId},
   } = useRoute();
 
-  const fetchQuestions = async (endPoint, states, actions) => {
-    const [setQuestions, setIsLoading, setCurrentQuestion] = actions;
+  const fetchQuestions = async (api, states, setStates) => {
+    const [quizAPI, endPoint] = api;
+    const currentQuestion = states;
+    const [setQuestions, setIsLoading, setCurrentQuestion, setLastIndex] =
+      setStates;
 
     setIsLoading(true);
+
     try {
       await quizAPI.get(endPoint).then(({data}) => {
         setQuestions(data);
         setIsLoading(false);
         setCurrentQuestion({
-          ...states,
-          question: data[states.index || 0].question,
+          ...currentQuestion,
+          question: data[currentQuestion.index || 0].question,
         });
+        setLastIndex(data.length - 1);
       });
     } catch (error) {
       console.error(error);
@@ -52,38 +58,49 @@ export const DetailScreen = () => {
   };
 
   useEffect(() => {
-    fetchQuestions(`getquestions/${testId}`, currentQuestion, [
-      setQuestions,
-      setIsLoading,
-      setCurrentQuestion,
-    ]);
+    fetchQuestions(
+      [quizAPI, `getquestions/${testId}`],
+      currentQuestion,
+      [setQuestions, setIsLoading, setCurrentQuestion, setLastIndex],
+    );
   }, []);
 
-  const goToNextQuestion = (data, states, action, userAnswers) => {
+  const goToNextQuestion = (data, states, setStates, constants) => {
+    const questions = data;
+    const [currentQuestion, userAnswers] = states;
+    const [setCurrentQuestion, setUserAnswers] = setStates;
+    const lastIndex = constants;
+
     let currentIndex;
-    let lastIndex = data.length - 1;
-    if (states.index + 1 > lastIndex) {
+
+    if (currentQuestion.index + 1 > lastIndex) {
       currentIndex = lastIndex;
-      navigation.push('Result', userAnswers);
-    } else currentIndex = states.index + 1;
+    } else currentIndex = currentQuestion.index + 1;
 
-    action({
-      ...states,
-      index: currentIndex,
-      progress: ((currentIndex + 1) / data.length) * 100,
-      question: data[currentIndex].question,
-      answer: '',
-    });
-  };
-
-  const saveUserAnswers = (input, states, action) => {
-    let currentAnswer = {
-      id: questions[states.length].id,
-      userAnswer: input,
+    let tempAnswer = {
+      id: userAnswers.length <= lastIndex && questions[userAnswers.length].id,
+      userAnswer: currentQuestion.answer,
     };
 
-    action([...states, currentAnswer]);
+    setCurrentQuestion({
+      ...currentQuestion,
+      index: currentIndex,
+      progress: (currentIndex / questions.length) * 100,
+      question:
+        currentIndex < questions.length && questions[currentIndex].question,
+      answer: '',
+    });
+
+    setUserAnswers([...userAnswers, tempAnswer]);
   };
+
+  const goToResultScreen = (navigation, location, data) => {
+    const userAnswers = data;
+    navigation.push(location, userAnswers);
+  };
+
+  if (userAnswers.length === lastIndex + 1)
+    goToResultScreen(navigation, 'Result', userAnswers);
 
   return (
     <AppContext.Provider value={{userAnswers, questions}}>
@@ -116,9 +133,9 @@ export const DetailScreen = () => {
               style={{marginTop: size.lg}}
               placeholder="Answer"
               placeholderTextColor={color.placeHolderGray}
-              onChangeText={newText =>
-                setCurrentQuestion({...currentQuestion, answer: newText})
-              }
+              onChangeText={newText => {
+                setCurrentQuestion({...currentQuestion, answer: newText});
+              }}
               value={currentQuestion.answer}
             />
             <Button
@@ -128,14 +145,9 @@ export const DetailScreen = () => {
               onPress={() => {
                 goToNextQuestion(
                   questions,
-                  currentQuestion,
-                  setCurrentQuestion,
-                  userAnswers,
-                );
-                saveUserAnswers(
-                  currentQuestion.answer,
-                  userAnswers,
-                  setUserAnswers,
+                  [currentQuestion, userAnswers],
+                  [setCurrentQuestion, setUserAnswers],
+                  lastIndex,
                 );
               }}
             />
