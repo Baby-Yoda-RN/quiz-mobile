@@ -3,6 +3,8 @@ import {View, SafeAreaView, Text, TouchableOpacity} from 'react-native';
 import {style} from './Header.style';
 import {Icon} from '../icon/Icon';
 import {isString, isEmpty} from 'lodash';
+import { AppNavigation } from '../../navigation/appNavigation/AppNavigation';
+import { NavigationContainer } from '@react-navigation/native';
 
 export const Header = ({
   leftIconName,
@@ -46,9 +48,10 @@ export const Header = ({
         {headerContent}
 
         {rightIconName && isValidElement(rightIconName) && (
-          <TouchableOpacity onPress={rightOnPress}>
+          <TouchableOpacity onPress={navigation.push('Profile')}>
             <Icon
-              iconName={rightIconName}
+              iconSet={'MaterialCommunityIcons'}
+              iconName={'account-circle-outline'}
               customIconContainerStyle={rightContainerStyle}
             />
           </TouchableOpacity>
