@@ -113,10 +113,7 @@ export const DetailScreen = () => {
           />
         }
         rightElement={
-          <Icon
-            iconSet={'MaterialCommunityIcons'}
-            iconName={'account-circle-outline'}
-          />
+          <Icon iconSet={'MaterialCommunityIcons'} iconName={'account-circle-outline'}/>
         }
       />
       <Container>
