@@ -3,7 +3,7 @@ import {Text, View} from 'react-native';
 import SyntaxHighlighter from 'react-native-syntax-highlighter';
 import {size, color} from '../../theme';
 
-export const Highlighter = (language = 'css', newCodeString, ...rest) => {
+export const Highlighter = ({language = 'css', newCodeString, ...rest}) => {
   const oldCode = `
   position: absolute; 
   width: 319px;
@@ -16,7 +16,7 @@ export const Highlighter = (language = 'css', newCodeString, ...rest) => {
   rgba(206,206,206,0.16);  
   border-radius: 8px`;
 
-  const codeString = newCodeString && oldCode;
+  const codeString = newCodeString ? newCodeString : oldCode;
   return (
     <SyntaxHighlighter
       language="css"

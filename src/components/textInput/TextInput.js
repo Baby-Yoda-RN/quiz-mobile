@@ -1,15 +1,9 @@
-import {TextInput as NativeTextInput } from 'react-native';
+import {TextInput as NativeTextInput} from 'react-native';
 import React from 'react';
 import {styles} from './TextInput.styles';
-import {color} from '../../theme/'
+import {color} from '../../theme/';
 
-
-export const TextInput = ({
-  isSensitive = false,
-  style:customStyles,
-  ...rest
-}) => {
-
+export const TextInput = ({isSensitive = false, customStyles, ...rest}) => {
   return (
     <NativeTextInput
       style={[styles.textInputStyles, customStyles]}
@@ -19,4 +13,3 @@ export const TextInput = ({
     />
   );
 };
-
