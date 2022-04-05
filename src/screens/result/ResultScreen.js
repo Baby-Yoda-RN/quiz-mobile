@@ -4,8 +4,18 @@ import {Button, Container, Header, Icon, Card} from '../../components'
 import {style} from '../../components/container/Container.styles'
 import {color} from '../../theme'
 import {styles} from './ResultScreen.styles'
+import {useNavigation, useRoute} from '@react-navigation/native';
 
 export const ResultScreen = () => {
+  const route = useRoute();
+  const data = {
+    userAnswers: route.params,
+  };
+ 
+  const numberOfQuestions = route.params.length;
+
+  console.log(numberOfQuestions);
+  
   return (
   <>
     <Header
