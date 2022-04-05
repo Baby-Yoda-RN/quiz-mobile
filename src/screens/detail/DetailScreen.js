@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
-import {ActivityIndicator} from 'react-native';
+import {ActivityIndicator, Alert, TouchableHighlight} from 'react-native';
 import {AppContext} from '../../context/AppContext';
 import {
   Button,
@@ -26,6 +26,7 @@ export const DetailScreen = () => {
     answer: '',
     progress: 0,
   });
+  const {signOut} = useContext(AppContext);
 
   const navigation = useNavigation();
   const {
@@ -102,6 +103,17 @@ export const DetailScreen = () => {
     navigation.push(location, userAnswers);
   };
 
+  const LogoutAlert = () => {
+    Alert.alert('Logout', '', [
+      {
+        text: 'Cancel',
+        onPress: () => {},
+        style: 'cancel',
+      },
+      {text: 'OK', onPress: () => signOut()},
+    ]);
+  };
+
   return (
     <AppContext.Provider value={{userAnswers, questions}}>
       <Header
@@ -113,10 +125,12 @@ export const DetailScreen = () => {
           />
         }
         rightElement={
-          <Icon
-            iconSet={'MaterialCommunityIcons'}
-            iconName={'account-circle-outline'}
-          />
+          <TouchableHighlight onPress={LogoutAlert}>
+            <Icon
+              iconSet={'MaterialCommunityIcons'}
+              iconName={'account-circle-outline'}
+            />
+          </TouchableHighlight>
         }
       />
       <Container>

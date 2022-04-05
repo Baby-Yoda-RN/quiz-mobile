@@ -9,3 +9,4 @@ export * from './highlighter/HighLighter';
 export * from './stepsProgress/StepsProgress';
 export * from './listView/ListView';
 export * from './card/Card';
+export * from './alert/LogoutAlert';
