@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
-import {ActivityIndicator} from 'react-native';
+import {ActivityIndicator, TouchableOpacity} from 'react-native';
 import {AppContext} from '../../context/AppContext';
 import {
   Button,
@@ -117,7 +117,10 @@ export const DetailScreen = () => {
           />
         }
         rightElement={
-          <Icon iconSet={'MaterialCommunityIcons'} iconName={'account-circle-outline'}/>
+          <Icon
+            iconSet={'MaterialCommunityIcons'}
+            iconName={'account-circle-outline'}
+          />
         }
       />
       <Container>
