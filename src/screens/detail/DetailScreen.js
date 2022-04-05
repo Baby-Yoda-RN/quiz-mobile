@@ -1,13 +1,7 @@
-<<<<<<< HEAD
-import React, {useState} from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-=======
 import React, {useState, useEffect} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {ActivityIndicator} from 'react-native';
 import {AppContext} from '../../context/AppContext';
->>>>>>> 704197141efb0fbbd53c45e5998ba4925ead51ac
 import {
   Button,
   Header,
@@ -22,10 +16,6 @@ import {quizAPI} from '../../configuration/Axios.configuration';
 import {color, size} from '../../theme';
 
 export const DetailScreen = () => {
-<<<<<<< HEAD
-  const [text, onChangeText] = useState('');
-  const navigation = useNavigation();
-=======
   const [isLoading, setIsLoading] = useState(false);
   const [questions, setQuestions] = useState();
   const [lastIndex, setLastIndex] = useState(0);
@@ -111,27 +101,21 @@ export const DetailScreen = () => {
     const userAnswers = data;
     navigation.push(location, userAnswers);
   };
->>>>>>> 704197141efb0fbbd53c45e5998ba4925ead51ac
 
   return (
     <AppContext.Provider value={{userAnswers, questions}}>
       <Header
-<<<<<<< HEAD
-        leftElement={
-        <TouchableOpacity onPress={() => {navigation.push('Dashboard')}}>
-          <Icon iconSet={'AntDesign'} iconName={'arrowleft'} />
-        </TouchableOpacity>
-        }
-        headerTitle={<StepsProgress />}
-=======
-        leftElement={<Icon iconSet={'AntDesign'} iconName={'arrowleft'} />}
+         leftElement={
+          <TouchableOpacity onPress={() => {navigation.push('Dashboard')}}>
+            <Icon iconSet={'AntDesign'} iconName={'arrowleft'} />
+          </TouchableOpacity>
+          }
         headerTitle={
           <StepsProgress
             currentStep={currentQuestion.index + 1}
             totalSteps={questions && questions.length}
           />
         }
->>>>>>> 704197141efb0fbbd53c45e5998ba4925ead51ac
         rightElement={
           <Icon iconSet={'MaterialCommunityIcons'} iconName={'account-circle-outline'}/>
         }
