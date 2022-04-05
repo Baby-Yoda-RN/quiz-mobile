@@ -12,6 +12,8 @@ export const ResultScreen = () => {
   const [numAnswersCorrect, setNumAnswersCorrect] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
+  const numQuestions = route.params.length;
+
   const data = {
     userAnswers: route.params,
   };
@@ -22,7 +24,7 @@ export const ResultScreen = () => {
       quizAPI
         .post('/checkanswers', data)
         .then(response => {
-          setNumAnswersCorrect(response.data * 20);
+          setNumAnswersCorrect(response.data * numQuestions);
         })
         .catch(error => {
           console.error(error);
@@ -54,7 +56,7 @@ export const ResultScreen = () => {
       />
       <Container background={color.midGray} containerStyle={styles.container}>
         <Card
-          score={numAnswersCorrect}
+          score={`${numAnswersCorrect}/${numQuestions}`}
           isLoading={isLoading}
           textMessage={textMessage}
           customScoreStyle={customScoreStyle}

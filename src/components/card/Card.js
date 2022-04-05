@@ -5,7 +5,7 @@ import {styles} from './Card.style';
 
 export const Card = ({
   textMessage,
-  score = 10,
+  score = '10/20',
   customContainerSyle,
   customTextMessageStyle,
   customScoreStyle = {color: '#BC230E'},
@@ -22,8 +22,7 @@ export const Card = ({
             <Text style={[styles.textMessage, customTextMessageStyle]}>
               {textMessage}
             </Text>
-            <Text
-              style={[styles.score, customScoreStyle]}>{`${score}/20`}</Text>
+            <Text style={[styles.score, customScoreStyle]}>{score}</Text>
           </View>
         )}
       </View>
