@@ -105,7 +105,11 @@ export const DetailScreen = () => {
   return (
     <AppContext.Provider value={{userAnswers, questions}}>
       <Header
-        leftElement={<Icon iconSet={'AntDesign'} iconName={'arrowleft'} />}
+         leftElement={
+          <TouchableOpacity onPress={() => {navigation.push('Dashboard')}}>
+            <Icon iconSet={'AntDesign'} iconName={'arrowleft'} />
+          </TouchableOpacity>
+          }
         headerTitle={
           <StepsProgress
             currentStep={currentQuestion.index + 1}
