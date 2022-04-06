@@ -105,24 +105,20 @@ export const DetailScreen = () => {
   return (
     <AppContext.Provider value={{userAnswers, questions}}>
       <Header
-         leftElement={
-          <TouchableOpacity onPress={() => {navigation.push('Dashboard')}}>
-            <Icon iconSet={'AntDesign'} iconName={'arrowleft'} />
-          </TouchableOpacity>
-          }
-        headerTitle={
+        leftIconSet={'AntDesign'}
+        leftIconName={'arrowleft'}
+        leftOnPress={() => navigation.push('Dashboard')}
+        headerElement={
           <StepsProgress
             currentStep={currentQuestion.index + 1}
             totalSteps={questions && questions.length}
           />
         }
-        rightElement={
-          <Icon
-            iconSet={'MaterialCommunityIcons'}
-            iconName={'account-circle-outline'}
-          />
-        }
+        rightIconSet={'MaterialCommunityIcons'}
+        rightIconName={'account-circle-outline'}
+        rightOnPress={() => navigation.push('Profile')}
       />
+
       <Container>
         {isLoading ? (
           <ActivityIndicator size="large" />

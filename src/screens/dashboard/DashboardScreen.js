@@ -33,7 +33,7 @@ export const DashboardScreen = () => {
   }, []);
   return (
     <>
-      <Header
+      {/* <Header
         rightElement={
           <TouchableOpacity onPress={() => navigation.push('Profile')}>
             <Icon
@@ -42,7 +42,14 @@ export const DashboardScreen = () => {
             />
           </TouchableOpacity>
         }
+      /> */}
+
+      <Header
+        rightIconSet={'MaterialCommunityIcons'}
+        rightIconName={'account-circle-outline'}
+        rightOnPress={() => navigation.push('Profile')}
       />
+
       {isLoading || !quiz ? (
         <ActivityIndicator size="large" />
       ) : (

@@ -47,12 +47,9 @@ export const ResultScreen = () => {
   return (
     <>
       <Header
-        rightElement={
-          <Icon
-            iconSet={'MaterialCommunityIcons'}
-            iconName={'account-circle-outline'}
-          />
-        }
+        rightIconSet={'MaterialCommunityIcons'}
+        rightIconName={'account-circle-outline'}
+        rightOnPress={() => navigation.push('Profile')}
       />
       <Container background={color.midGray} containerStyle={styles.container}>
         <Card
