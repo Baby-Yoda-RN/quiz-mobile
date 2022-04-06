@@ -3,9 +3,8 @@ import {
   ActivityIndicator,
   View,
   FlatList,
-  TouchableOpacity,
 } from 'react-native';
-import {Header, Container, Icon, ListItem} from '../../components';
+import {Header, Container, ListItem} from '../../components';
 import {quizAPI} from '../../configuration/Axios.configuration';
 import {size} from '../../theme';
 import {useNavigation} from '@react-navigation/native';
@@ -33,17 +32,6 @@ export const DashboardScreen = () => {
   }, []);
   return (
     <>
-      {/* <Header
-        rightElement={
-          <TouchableOpacity onPress={() => navigation.push('Profile')}>
-            <Icon
-              iconSet={'MaterialCommunityIcons'}
-              iconName={'account-circle-outline'}
-            />
-          </TouchableOpacity>
-        }
-      /> */}
-
       <Header
         rightIconSet={'MaterialCommunityIcons'}
         rightIconName={'account-circle-outline'}

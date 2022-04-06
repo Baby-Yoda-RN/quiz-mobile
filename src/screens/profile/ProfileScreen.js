@@ -1,9 +1,8 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {ActivityIndicator, Text, TouchableOpacity, Image} from 'react-native';
+import {ActivityIndicator, Text, Image} from 'react-native';
 import {quizAPI} from '../../configuration/Axios.configuration';
-import {Header, Container, Icon} from '../../components';
+import {Header, Container} from '../../components';
 import {AppContext} from '../../context/AppContext';
-import {size} from '../../theme';
 import {useNavigation} from '@react-navigation/native';
 
 export const ProfileScreen = () => {

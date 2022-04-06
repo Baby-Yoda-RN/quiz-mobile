@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
-import {ActivityIndicator, TouchableOpacity} from 'react-native';
+import {ActivityIndicator} from 'react-native';
 import {AppContext} from '../../context/AppContext';
 import {
   Button,
@@ -9,7 +9,6 @@ import {
   Container,
   Highlighter,
   StepsProgress,
-  Icon,
   TextInput,
 } from '../../components';
 import {quizAPI} from '../../configuration/Axios.configuration';
