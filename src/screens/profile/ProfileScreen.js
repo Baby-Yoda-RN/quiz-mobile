@@ -1,9 +1,8 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {ActivityIndicator, Text, TouchableOpacity, Image} from 'react-native';
+import {ActivityIndicator, Text, Image} from 'react-native';
 import {quizAPI} from '../../configuration/Axios.configuration';
-import {Header, Container, Icon} from '../../components';
+import {Header, Container} from '../../components';
 import {AppContext} from '../../context/AppContext';
-import {size} from '../../theme';
 import {useNavigation} from '@react-navigation/native';
 
 export const ProfileScreen = () => {
@@ -40,18 +39,14 @@ export const ProfileScreen = () => {
   return (
     <>
       <Header
-        leftElement={
-          <TouchableOpacity onPress={() => navigation.push('Dashboard')}>
-            <Icon iconSet={'AntDesign'} iconName={'arrowleft'} />
-          </TouchableOpacity>
-        }
-        headerTitle={<Text style={{fontSize: size.rg}}>Profile</Text>}
-        rightElement={
-          <TouchableOpacity onPress={() => signOut()}>
-            <Icon iconSet={'AntDesign'} iconName={'logout'} />
-          </TouchableOpacity>
-        }
+        leftIconSet={'AntDesign'}
+        leftIconName={'arrowleft'}
+        leftOnPress={() => navigation.push('Dashboard')}
+        rightIconSet={'AntDesign'}
+        rightIconName={'logout'}
+        rightOnPress={() => signOut()}
       />
+
       {isLoading || !userInfo ? (
         <>
           <ActivityIndicator size="large" />

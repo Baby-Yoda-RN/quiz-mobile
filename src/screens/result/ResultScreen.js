@@ -1,6 +1,6 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
 import React, {useState, useEffect} from 'react';
-import {Button, Container, Header, Icon, Card} from '../../components';
+import {Button, Container, Header, Card} from '../../components';
 import {quizAPI} from '../../configuration/Axios.configuration';
 import {color} from '../../theme';
 import {styles} from './ResultScreen.styles';
@@ -47,12 +47,9 @@ export const ResultScreen = () => {
   return (
     <>
       <Header
-        rightElement={
-          <Icon
-            iconSet={'MaterialCommunityIcons'}
-            iconName={'account-circle-outline'}
-          />
-        }
+        rightIconSet={'MaterialCommunityIcons'}
+        rightIconName={'account-circle-outline'}
+        rightOnPress={() => navigation.push('Profile')}
       />
       <Container background={color.midGray} containerStyle={styles.container}>
         <Card
