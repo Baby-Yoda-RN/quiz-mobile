@@ -1,9 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, FlatList} from 'react-native';
-import {Header, Container, Icon, ListItem, ListView} from '../../components';
-// import {ListViewInfo} from '../../components/listView/ListView.view';
+import {
+  ActivityIndicator,
+  View,
+  FlatList,
+} from 'react-native';
+import {Header, Container, ListItem} from '../../components';
 import {quizAPI} from '../../configuration/Axios.configuration';
-import {color, size} from '../../theme';
+import {size} from '../../theme';
 import {useNavigation} from '@react-navigation/native';
 
 export const DashboardScreen = () => {
@@ -16,10 +19,7 @@ export const DashboardScreen = () => {
       setIsLoading(true);
       try {
         quizAPI.get('/getalltests').then(({data}) => {
-          const sortData = data.sort(
-            (firstItem, secondItem) => firstItem.id - secondItem.id,
-          );
-          setData(sortData);
+          setData(data);
           setIsLoading(false);
         });
       } catch (error) {
@@ -33,29 +33,31 @@ export const DashboardScreen = () => {
   return (
     <>
       <Header
-        rightElement={
-          <Icon
-            iconSet={'MaterialCommunityIcons'}
-            iconName={'account-circle-outline'}
-          />
-        }
+        rightIconSet={'MaterialCommunityIcons'}
+        rightIconName={'account-circle-outline'}
+        rightOnPress={() => navigation.push('Profile')}
       />
-      <Container>
-        <FlatList
-          contentContainerStyle={{paddingVertical: size.sm}}
-          ItemSeparatorComponent={() => <View style={{padding: size.sm}} />}
-          data={quiz}
-          renderItem={({item}) => (
-            <ListItem
-              title={item.title}
-              subTitle={item.subtitle}
-              onPress={() => {
-                navigation.push('Detail', {id: item.id});
-              }}
-            />
-          )}
-        />
-      </Container>
+
+      {isLoading || !quiz ? (
+        <ActivityIndicator size="large" />
+      ) : (
+        <Container>
+          <FlatList
+            contentContainerStyle={{paddingVertical: size.sm}}
+            ItemSeparatorComponent={() => <View style={{padding: size.sm}} />}
+            data={quiz}
+            renderItem={({item}) => (
+              <ListItem
+                title={item.title}
+                subTitle={item.subtitle}
+                onPress={() => {
+                  navigation.push('Detail', {id: item.id});
+                }}
+              />
+            )}
+          />
+        </Container>
+      )}
     </>
   );
 };
