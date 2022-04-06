@@ -1,12 +1,4 @@
-import {authInitialState} from './auth/AuthState';
-
-export const globalInitialState = {
-  isLoading: true,
-  auth: authInitialState,
-  quiz: null,
-};
-
-export const reducer = (prevState, action) => {
+export const authReducer = (prevState, action) => {
   switch (action.type) {
     case 'RESTORE_TOKEN':
       return {
@@ -30,5 +22,9 @@ export const reducer = (prevState, action) => {
           isSignout: true,
         },
       };
+    case 'TEST':
+      return prevState
+    default:
+      return prevState
   }
 };
