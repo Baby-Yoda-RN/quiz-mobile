@@ -6,15 +6,15 @@ import {AuthNavigation} from '../authNavigation/AuthNavigation';
 import {SplashScreen} from '../../screens/splash/SplashScreen';
 import {useAppValue} from '../../context/AppProvider';
 import {getData} from '../../utilities/localStorage';
+import {TOKEN_KEY, RESTORE_TOKEN} from '../../constants.js'
 
 export const Router = () => {
   const {state, dispatch} = useAppValue();
 
   useEffect(() => {
     const isAuth = async () => {
-      const token = await getData('authToken');
-      dispatch({type: 'RESTORE_TOKEN', token: token});
-      console.log('lele pancha ', state);
+      const token = await getData(TOKEN_KEY);
+      dispatch({type: RESTORE_TOKEN, token: token});
     };
     isAuth();
   }, []);
