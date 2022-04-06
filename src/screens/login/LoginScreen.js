@@ -1,20 +1,32 @@
-import React, {useState, useContext} from 'react';
+import React, {useState} from 'react';
 import {LoginScreenView} from './LoginScreen.view';
-import {AppContext} from '../../context/AppContext';
+import { useAppValue } from '../../context/AppProvider';
+import { getLoginData } from '../../data/getLoginData';
+import { storeData } from '../../utilities/localStorage';
 
 export const LoginScreen = () => {
-  const {signIn} = useContext(AppContext);
-
+  const {dispatch} = useAppValue()
   const [errors, setErrors] = useState({
     emailError: '',
     passwordError: '',
     credentialError: '',
   });
-  const [values, setValues] = useState({email: '', password: ''});
+  const [values, setValues] = useState({email: 'First.Last@gmail.com', password: 'First.Last@gmail.com'});
   const [isLoading, setIsLoading] = useState(false);
 
+  const signIn = async values => {
+    let data = await getLoginData(values);
+    if (data.error) {
+      return data;
+    }
+    await storeData('authToken', data.token);
+    dispatch({type: 'SIGN_IN', token: data.token});
+    return data;
+  };
+
   const handleLoginButtonPress = async () => {
-    setErrors({emailError: '', passwordError: ''});
+    setIsLoading(true)
+    setErrors({emailError: '', passwordError: '', credentialError: ''});
     if (!values.email) {
       setErrors(prevState => ({
         ...prevState,
@@ -41,6 +53,7 @@ export const LoginScreen = () => {
         }));
       }
     }
+    setIsLoading(false)
   };
 
   return (

@@ -1,33 +1,31 @@
 import React, {useEffect} from 'react';
-//import {AppContext} from '../../context/AppContext';
 import {NavigationContainer} from '@react-navigation/native';
 
-import {AppNavigation} from '../../navigation/appNavigation/AppNavigation'
+import {AppNavigation} from '../../navigation/appNavigation/AppNavigation';
 import {AuthNavigation} from '../authNavigation/AuthNavigation';
-import { SplashScreen } from '../../screens/splash/SplashScreen'
-import { useStore } from '../../context/AppProvider';
-import { authInitialState } from '../../context/auth/AuthState';
+import {SplashScreen} from '../../screens/splash/SplashScreen';
+import {useAppValue} from '../../context/AppProvider';
+import {getData} from '../../utilities/localStorage';
 
 export const Router = () => {
-  const store = useStore()
+  const {state, dispatch} = useAppValue();
 
   useEffect(() => {
-    console.log(store.dispatch({type:'TEST'}))
-  },[])
-  /*if(state.isLoading){
-    return (
-      <SplashScreen/>
-    )
-  }*/
+    const isAuth = async () => {
+      const token = await getData('authToken');
+      dispatch({type: 'RESTORE_TOKEN', token: token});
+      console.log('lele pancha ', state);
+    };
+    isAuth();
+  }, []);
+
+  if (state.auth.isLoading) {
+    return <SplashScreen />;
+  }
 
   return (
     <NavigationContainer>
-      {/*state.auth.token?(
-        <AppNavigation/>
-      ):(
-        <AuthNavigation/>
-      )*/}
-      <AuthNavigation/>
+      {state.auth.token ? <AppNavigation /> : <AuthNavigation />}
     </NavigationContainer>
   );
 };
