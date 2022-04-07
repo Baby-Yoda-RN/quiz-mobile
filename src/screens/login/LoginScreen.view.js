@@ -56,6 +56,7 @@ export const LoginScreenView = ({
           <ActivityIndicator size={'large'} color={color.primary} />
         ) : (
           <Button
+            isDisabled={values.email.length&&values.password.length > 0 ? false : true}
             title={'Login'}
             buttonStyle={styles.button}
             onPress={handleLoginButtonPress}
