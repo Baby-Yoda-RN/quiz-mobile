@@ -1,22 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
-import {ActivityIndicator} from 'react-native';
-import {AppContext} from '../../context/AppContext';
-import {
-  Button,
-  Header,
-  ProgressBar,
-  Container,
-  Highlighter,
-  StepsProgress,
-  TextInput,
-} from '../../components';
 import {quizAPI} from '../../configuration/Axios.configuration';
-import {color, size} from '../../theme';
+import {DetailScreenView} from './DetailScreen.view';
 
 export const DetailScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [questions, setQuestions] = useState();
+  const [questions, setQuestions] = useState([]);
   const [lastIndex, setLastIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState({
@@ -27,6 +16,7 @@ export const DetailScreen = () => {
   });
 
   const navigation = useNavigation();
+
   const {
     params: {id: testId},
   } = useRoute();
@@ -101,78 +91,23 @@ export const DetailScreen = () => {
     navigation.push(location, userAnswers);
   };
 
-  return (
-    <AppContext.Provider value={{userAnswers, questions}}>
-      <Header
-        leftIconSet={'AntDesign'}
-        leftIconName={'arrowleft'}
-        leftOnPress={() => navigation.push('Dashboard')}
-        headerElement={
-          <StepsProgress
-            currentStep={currentQuestion.index + 1}
-            totalSteps={questions && questions.length}
-          />
-        }
-        rightIconSet={'MaterialCommunityIcons'}
-        rightIconName={'account-circle-outline'}
-        rightOnPress={() => navigation.push('Profile')}
-      />
+  useEffect(() => {
+    if (userAnswers.length > lastIndex)
+      goToResultScreen(navigation, 'Result', userAnswers);
+  }, [userAnswers.length]);
 
-      <Container>
-        {isLoading ? (
-          <ActivityIndicator size="large" />
-        ) : (
-          <>
-            <ProgressBar
-              style={{marginVertical: size.rg}}
-              percentage={currentQuestion.progress}
-            />
-            <Highlighter newCodeString={currentQuestion.question} />
-            {userAnswers.length > lastIndex ? (
-              <Button
-                isDisabled={false}
-                buttonStyle={{
-                  paddingVertical: size.sm,
-                  marginVertical: size.rg,
-                }}
-                title="Submit ?"
-                onPress={() => {
-                  if (userAnswers.length > lastIndex)
-                    goToResultScreen(navigation, 'Result', userAnswers);
-                }}
-              />
-            ) : (
-              <>
-                <TextInput
-                  style={{marginTop: size.lg}}
-                  placeholder="Answer"
-                  placeholderTextColor={color.placeHolderGray}
-                  onChangeText={newText => {
-                    setCurrentQuestion({...currentQuestion, answer: newText});
-                  }}
-                  value={currentQuestion.answer}
-                />
-                <Button
-                  isDisabled={currentQuestion.answer.length > 0 ? false : true}
-                  buttonStyle={{
-                    paddingVertical: size.sm,
-                    marginVertical: size.rg,
-                  }}
-                  title="Next"
-                  onPress={() => {
-                    goToNextQuestion(
-                      questions,
-                      [currentQuestion, userAnswers],
-                      [setCurrentQuestion, setUserAnswers],
-                      lastIndex,
-                    );
-                  }}
-                />
-              </>
-            )}
-          </>
-        )}
-      </Container>
-    </AppContext.Provider>
+  return (
+    <DetailScreenView
+      navigation={navigation}
+      currentQuestion={currentQuestion}
+      questions={questions}
+      isLoading={isLoading}
+      userAnswers={userAnswers}
+      lastIndex={lastIndex}
+      setCurrentQuestion={setCurrentQuestion}
+      setUserAnswers={setUserAnswers}
+      goToNextQuestion={goToNextQuestion}
+      goToResultScreen={goToResultScreen}
+    />
   );
 };
