@@ -1,15 +1,23 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {ActivityIndicator, Text, Image} from 'react-native';
 import {quizAPI} from '../../configuration/Axios.configuration';
 import {Header, Container} from '../../components';
-import {AppContext} from '../../context/AppContext';
 import {useNavigation} from '@react-navigation/native';
+import { useAppValue } from '../../context/AppProvider';
+import { removeData } from '../../utilities/localStorage';
+import {TOKEN_KEY, SIGN_OUT} from '../../constants'
 
 export const ProfileScreen = () => {
   const navigation = useNavigation();
-  const {signOut, state} = useContext(AppContext);
+  const {state,dispatch} = useAppValue()
   const [isLoading, setIsLoading] = useState(false);
   const [userInfo, setUserInfo] = useState();
+
+  const signOut = async () => {
+    await removeData(TOKEN_KEY);
+    dispatch({type: SIGN_OUT});
+  };
+
 
   const fetchData = async () => {
     setIsLoading(true);
