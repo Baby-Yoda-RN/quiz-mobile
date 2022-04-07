@@ -5,10 +5,6 @@ export const styles = StyleSheet.create({
     textInputContainer:{
         marginBottom:size.rg,
     },
-    button:{
-        marginVertical:size.sm,
-        paddingVertical:size.rg
-    },
     buttonContainer:{
         justifyContent:'center',
         marginTop:4,
@@ -23,11 +19,6 @@ export const styles = StyleSheet.create({
         flex:1,
         justifyContent:'center',
         marginHorizontal:size.lg,
-    },
-    textInput:{
-        paddingVertical:size.rg,
-        fontFamily:'Poppins-Regular',
-        fontSize:size.rg
     },
     errorContainer:{
         marginVertical:size.lg,
