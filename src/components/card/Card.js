@@ -20,7 +20,7 @@ export const Card = ({
           <ActivityIndicator size={'large'} color={color.primary} />
         ) : (
           <View>
-            <Text style={[styles.textMessage, customTextMessageStyle]}>
+            <Text numberOfLines={2} adjustsFontSizeToFit style={[styles.textMessage, customTextMessageStyle]}>
               {textMessage}
             </Text>
             {isQuestion ? (
