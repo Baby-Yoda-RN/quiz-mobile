@@ -9,5 +9,7 @@ export const styles = StyleSheet.create({
     borderRadius: size.sm,
     fontFamily: 'Poppins-Regular',
     paddingHorizontal: size.rg,
+    paddingVertical: size.rg,
+    fontSize: size.rg,
   },
 });

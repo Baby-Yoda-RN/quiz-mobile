@@ -6,6 +6,8 @@ export const styles = StyleSheet.create({
     borderRadius: size.sm,
     alignItems: 'center',
     justifyContent: 'center',
+    marginVertical:size.sm,
+    paddingVertical:size.rg
   },
   buttonDisabled: {
     backgroundColor: color.darkGray,
