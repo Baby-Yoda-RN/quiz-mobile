@@ -2,12 +2,12 @@ import React, {useState, useEffect} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {ActivityIndicator, TouchableOpacity} from 'react-native';
 import {AppContext} from '../../context/AppContext';
+import {Card} from '../../components'
 import {
   Button,
   Header,
   ProgressBar,
   Container,
-  Highlighter,
   StepsProgress,
   Icon,
   TextInput,
@@ -71,6 +71,7 @@ export const DetailScreen = () => {
     const [currentQuestion, userAnswers] = states;
     const [setCurrentQuestion, setUserAnswers] = setStates;
     const lastIndex = constants;
+    
 
     if (userAnswers.length <= lastIndex) {
       let currentIndex;
@@ -102,6 +103,7 @@ export const DetailScreen = () => {
     navigation.push(location, userAnswers);
   };
 
+  let questionsContainerSyle = {height: 380, paddingVertical: size.sm};
   return (
     <AppContext.Provider value={{userAnswers, questions}}>
       <Header
@@ -132,7 +134,12 @@ export const DetailScreen = () => {
               style={{marginVertical: size.rg}}
               percentage={currentQuestion.progress}
             />
-            <Highlighter newCodeString={currentQuestion.question} />
+            <Card 
+              textMessage={currentQuestion.question} 
+              isLoading = {isLoading}
+              isQuestion = {true}
+              customContainerSyle = {questionsContainerSyle}
+            />
             {userAnswers.length > lastIndex ? (
               <Button
                 isDisabled={false}
