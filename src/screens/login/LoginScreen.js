@@ -12,7 +12,7 @@ export const LoginScreen = () => {
     passwordError: '',
     credentialError: '',
   });
-  const [values, setValues] = useState({email: 'First.Last@gmail.com', password: 'First.Last@gmail.com'});
+  const [values, setValues] = useState({email: '', password: ''});
   const [isLoading, setIsLoading] = useState(false);
 
   const signIn = async values => {
