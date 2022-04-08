@@ -3,11 +3,13 @@ import React, {useState, useEffect} from 'react';
 import {quizAPI} from '../../configuration/Axios.configuration';
 import {color} from '../../theme';
 import {ResultScreenView} from './ResultScreen.view';
+import {useAppValue} from '../../context/AppProvider';
 
 export const ResultScreen = () => {
   const navigation = useNavigation();
   const route = useRoute();
 
+  const {state} = useAppValue();
   const [score, setScore] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -21,7 +23,9 @@ export const ResultScreen = () => {
     const checkTestAnswers = () => {
       setIsLoading(true);
       quizAPI
-        .post('/checkanswers', data)
+        .post('/checkanswers', data, {
+          headers: {Authorization: state.auth.token},
+        })
         .then(response => {
           setScore(response.data);
         })
