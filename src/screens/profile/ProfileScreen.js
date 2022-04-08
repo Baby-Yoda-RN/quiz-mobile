@@ -5,7 +5,7 @@ import {Header, Container} from '../../components';
 import {useNavigation} from '@react-navigation/native';
 import { useAppValue } from '../../context/AppProvider';
 import { removeData } from '../../utilities/localStorage';
-import {TOKEN_KEY, SIGN_OUT} from '../../constants'
+import {TOKEN_KEY, SIGN_OUT} from '../../constants/constants'
 
 export const ProfileScreen = () => {
   const navigation = useNavigation();

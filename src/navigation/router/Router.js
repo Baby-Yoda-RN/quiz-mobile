@@ -3,10 +3,10 @@ import {NavigationContainer} from '@react-navigation/native';
 
 import {AppNavigation} from '../../navigation/appNavigation/AppNavigation';
 import {AuthNavigation} from '../authNavigation/AuthNavigation';
-import {SplashScreen} from '../../screens/splash/SplashScreen';
 import {useAppValue} from '../../context/AppProvider';
 import {getData} from '../../utilities/localStorage';
-import {TOKEN_KEY, RESTORE_TOKEN} from '../../constants.js'
+import {TOKEN_KEY, RESTORE_TOKEN} from '../../constants/constants.js'
+import { Container } from '../../components';
 
 export const Router = () => {
   const {state, dispatch} = useAppValue();
@@ -20,7 +20,7 @@ export const Router = () => {
   }, []);
 
   if (state.auth.isLoading) {
-    return <SplashScreen />;
+    return <Container isLoading={true} />;
   }
 
   return (
