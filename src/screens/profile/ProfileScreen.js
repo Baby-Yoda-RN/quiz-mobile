@@ -6,6 +6,7 @@ import {useNavigation} from '@react-navigation/native';
 import { useAppValue } from '../../context/AppProvider';
 import { removeData } from '../../utilities/localStorage';
 import {TOKEN_KEY, SIGN_OUT} from '../../constants'
+import axios, { Axios } from 'axios';
 
 export const ProfileScreen = () => {
   const navigation = useNavigation();
@@ -31,7 +32,6 @@ export const ProfileScreen = () => {
             image: data.Image,
             scores: data.Scores,
           });
-          setIsLoading(false);
         });
     } catch (error) {
       console.error(error);
@@ -41,7 +41,38 @@ export const ProfileScreen = () => {
   };
 
   useEffect(() => {
+    let isMounted = true
+    setIsLoading(true);
+    const source = axios.CancelToken.source()
+    const fetchData = async () => {
+    try {
+      quizAPI
+        .get('profile', {
+          headers: {Authorization: state.auth.token},
+          cancelToken:source.token,
+        })
+        .then(({data}) => {
+          if(isMounted){
+            setUserInfo({
+              name: data.Name,
+              email: data.Email,
+              image: data.Image,
+              scores: data.Scores,
+            });
+          }
+        });
+    } catch (error) {
+      if(quizAPI.isCancel(error)){
+      }else{
+        console.error(error);
+      }
+    } finally {
+      if(isMounted)
+        setIsLoading(false);
+    }
+  };
     fetchData();
+    return () => {isMounted = false}
   }, []);
 
   return (

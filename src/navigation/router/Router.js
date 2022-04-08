@@ -25,7 +25,7 @@ export const Router = () => {
 
   return (
     <NavigationContainer>
-      {state.auth.token ? <AppNavigation /> : <AuthNavigation />}
+      {state.auth.token == null ? <AuthNavigation /> : <AppNavigation />}
     </NavigationContainer>
   );
 };
