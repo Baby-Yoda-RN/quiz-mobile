@@ -5,7 +5,7 @@ import {AppNavigation} from '../../navigation/appNavigation/AppNavigation';
 import {AuthNavigation} from '../authNavigation/AuthNavigation';
 import {useAppValue} from '../../context/AppProvider';
 import {getData} from '../../utilities/localStorage';
-import {TOKEN_KEY, RESTORE_TOKEN} from '../../constants/constants.js'
+import {TOKEN_KEY, RESTORE_TOKEN} from '../../constants/constants'
 import { Container } from '../../components';
 
 export const Router = () => {
