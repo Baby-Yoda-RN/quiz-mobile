@@ -1,12 +1,12 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {LoginScreenView} from './LoginScreen.view';
-import { useAppValue } from '../../context/AppProvider';
-import { getLoginData } from '../../data/getLoginData';
-import { storeData } from '../../utilities/localStorage';
-import {TOKEN_KEY, SIGN_IN} from '../../constants/constants'
+import {useAppValue} from '../../context/AppProvider';
+import {getLoginData} from '../../data/getLoginData';
+import {storeData} from '../../utilities/localStorage';
+import {TOKEN_KEY, SIGN_IN} from '../../constants';
 
 export const LoginScreen = () => {
-  const {dispatch} = useAppValue()
+  const {dispatch} = useAppValue();
   const [errors, setErrors] = useState({
     emailError: '',
     passwordError: '',
@@ -26,8 +26,8 @@ export const LoginScreen = () => {
   };
 
   const handleLoginButtonPress = async () => {
-    setIsLoading(true)
     setErrors({emailError: '', passwordError: '', credentialError: ''});
+    setIsLoading(true);
     if (!values.email) {
       setErrors(prevState => ({
         ...prevState,
@@ -54,8 +54,12 @@ export const LoginScreen = () => {
         }));
       }
     }
-    setIsLoading(false)
+    setIsLoading(false);
   };
+
+  useEffect(() => {
+    return () => {}
+  },[])
 
   return (
     <LoginScreenView

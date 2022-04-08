@@ -5,8 +5,8 @@ import {Header, Container} from '../../components';
 import {useNavigation} from '@react-navigation/native';
 import { useAppValue } from '../../context/AppProvider';
 import { removeData } from '../../utilities/localStorage';
-import {TOKEN_KEY, SIGN_OUT} from '../../constants/constants'
-import { ProfileScreenView } from './ProfileScreen.view';
+import {TOKEN_KEY, SIGN_OUT} from '../../constants'
+import axios from 'axios';
 
 export const ProfileScreen = () => {
   const navigation = useNavigation();
@@ -24,30 +24,39 @@ export const ProfileScreen = () => {
     dispatch({type: SIGN_OUT});
   };
 
-
-  const fetchData = async () => {
+  useEffect(() => {
+    let isMounted = true
     setIsLoading(true);
+    const source = axios.CancelToken.source()
+    const fetchData = async () => {
     try {
       quizAPI
-        .get('profile', {headers: {Authorization: state.auth.token}})
+        .get('profile', {
+          headers: {Authorization: state.auth.token},
+          cancelToken:source.token,
+        })
         .then(({data}) => {
-          setUserInfo({
-            name: data.Name,
-            email: data.Email,
-            image: data.Image,
-            scores: data.Scores,
-          });
-          setIsLoading(false);
+          if(isMounted){
+            setUserInfo({
+              name: data.Name,
+              email: data.Email,
+              image: data.Image,
+              scores: data.Scores,
+            });
+          }
         });
     } catch (error) {
-      console.error(error);
+      if(quizAPI.isCancel(error)){
+      }else{
+        console.error(error);
+      }
     } finally {
-      setIsLoading(false);
+      if(isMounted)
+        setIsLoading(false);
     }
   };
-
-  useEffect(() => {
     fetchData();
+    return () => {isMounted = false}
   }, []);
 
   return (
