@@ -10,6 +10,7 @@ export const Card = ({
   customTextMessageStyle,
   customScoreStyle = {color: '#BC230E'},
   isLoading = false,
+  isQuestion = false,
   ...rest
 }) => {
   return (
@@ -19,10 +20,14 @@ export const Card = ({
           <ActivityIndicator size={'large'} color={color.primary} />
         ) : (
           <View>
-            <Text style={[styles.textMessage, customTextMessageStyle]}>
+            <Text numberOfLines={2} adjustsFontSizeToFit style={[styles.textMessage, customTextMessageStyle]}>
               {textMessage}
             </Text>
-            <Text style={[styles.score, customScoreStyle]}>{score}</Text>
+            {isQuestion ? (
+              null
+            ):(
+              <Text style={[styles.score, customScoreStyle]}>{score}</Text>
+            )}
           </View>
         )}
       </View>

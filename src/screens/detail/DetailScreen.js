@@ -3,6 +3,7 @@ import {useNavigation, useRoute} from '@react-navigation/native';
 import {quizAPI} from '../../configuration/Axios.configuration';
 import {DetailScreenView} from './DetailScreen.view';
 
+
 export const DetailScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [questions, setQuestions] = useState([]);
