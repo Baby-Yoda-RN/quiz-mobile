@@ -6,7 +6,7 @@ import {useNavigation} from '@react-navigation/native';
 import { useAppValue } from '../../context/AppProvider';
 import { removeData } from '../../utilities/localStorage';
 import {TOKEN_KEY, SIGN_OUT} from '../../constants'
-import axios, { Axios } from 'axios';
+import axios from 'axios';
 
 export const ProfileScreen = () => {
   const navigation = useNavigation();
@@ -17,27 +17,6 @@ export const ProfileScreen = () => {
   const signOut = async () => {
     await removeData(TOKEN_KEY);
     dispatch({type: SIGN_OUT});
-  };
-
-
-  const fetchData = async () => {
-    setIsLoading(true);
-    try {
-      quizAPI
-        .get('profile', {headers: {Authorization: state.auth.token}})
-        .then(({data}) => {
-          setUserInfo({
-            name: data.Name,
-            email: data.Email,
-            image: data.Image,
-            scores: data.Scores,
-          });
-        });
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsLoading(false);
-    }
   };
 
   useEffect(() => {
