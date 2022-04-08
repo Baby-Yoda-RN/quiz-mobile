@@ -22,8 +22,7 @@
     "react-native-screens": "^3.13.1",
     "react-native-svg": "^12.3.0",
     "react-native-syntax-highlighter": "^2.1.0",
-    "react-native-vector-icons": "^9.1.0",
-    "react-syntax-highlighter": "^15.5.0"
+    "react-native-vector-icons": "^9.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
