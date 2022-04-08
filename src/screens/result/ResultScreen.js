@@ -1,9 +1,8 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
 import React, {useState, useEffect} from 'react';
-import {Button, Container, Header, Card} from '../../components';
 import {quizAPI} from '../../configuration/Axios.configuration';
 import {color} from '../../theme';
-import {styles} from './ResultScreen.styles';
+import {ResultScreenView} from './ResultScreen.view';
 
 export const ResultScreen = () => {
   const navigation = useNavigation();
@@ -47,25 +46,13 @@ export const ResultScreen = () => {
   const numAnswersCorrect = score * numQuestions;
 
   return (
-    <>
-      <Header
-        rightIconSet={'MaterialCommunityIcons'}
-        rightIconName={'account-circle-outline'}
-        rightOnPress={() => navigation.push('Profile')}
-      />
-      <Container background={color.midGray} containerStyle={styles.container}>
-        <Card
-          score={`${numAnswersCorrect}/${numQuestions}`}
-          isLoading={isLoading}
-          textMessage={textMessage}
-          customScoreStyle={customScoreStyle}
-        />
-        <Button
-          title={'Go to Dashboard'}
-          buttonStyle={styles.button}
-          onPress={() => navigation.push('Dashboard')}
-        />
-      </Container>
-    </>
+    <ResultScreenView
+      numAnswersCorrect={numAnswersCorrect}
+      numQuestions={numQuestions}
+      textMessage={textMessage}
+      navigation={navigation}
+      customScoreStyle={customScoreStyle}
+      isLoading={isLoading}
+    />
   );
 };
