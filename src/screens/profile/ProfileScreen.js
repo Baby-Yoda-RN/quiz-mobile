@@ -1,11 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {ActivityIndicator, Text, Image} from 'react-native';
+import {ProfileScreenView} from './ProfileScreen.view'
 import {quizAPI} from '../../configuration/Axios.configuration';
-import {Header, Container} from '../../components';
 import {useNavigation} from '@react-navigation/native';
 import { useAppValue } from '../../context/AppProvider';
 import { removeData } from '../../utilities/localStorage';
-import {TOKEN_KEY, SIGN_OUT} from '../../constants'
+import {TOKEN_KEY, SIGN_OUT} from '../../constants/constants'
 import axios from 'axios';
 
 export const ProfileScreen = () => {

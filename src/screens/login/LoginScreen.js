@@ -3,7 +3,7 @@ import {LoginScreenView} from './LoginScreen.view';
 import {useAppValue} from '../../context/AppProvider';
 import {getLoginData} from '../../data/getLoginData';
 import {storeData} from '../../utilities/localStorage';
-import {TOKEN_KEY, SIGN_IN} from '../../constants';
+import {TOKEN_KEY, SIGN_IN} from '../../constants/constants';
 
 export const LoginScreen = () => {
   const {dispatch} = useAppValue();
