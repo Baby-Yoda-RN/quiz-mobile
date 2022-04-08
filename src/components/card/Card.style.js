@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
   },
   textMessage: {
     color: color.darkGreen,
-    marginVertical: size.xl,
+    marginVertical: size.xs,
     fontSize: size.lg,
     textAlign: 'center',
   },

@@ -4,11 +4,11 @@ import {
   Header,
   ProgressBar,
   Container,
-  Highlighter,
   StepsProgress,
   TextInput,
+  Card,
 } from '../../components';
-import {color} from '../../theme';
+import {color, size} from '../../theme';
 import {styles} from './DetailScreen.styles';
 
 export const DetailScreenView = ({
@@ -22,6 +22,9 @@ export const DetailScreenView = ({
   setUserAnswers,
   goToNextQuestion,
 }) => {
+
+  let questionsContainerSyle = {flex: 1, paddingVertical: size.sm};
+  
   return (
     <>
       <Header
@@ -43,7 +46,12 @@ export const DetailScreenView = ({
           style={styles.progressBar}
           percentage={currentQuestion.progress}
         />
-        <Highlighter newCodeString={currentQuestion.question} />
+        <Card 
+          textMessage={currentQuestion.question} 
+          isLoading = {isLoading}
+          isQuestion = {true}
+          customContainerSyle = {questionsContainerSyle}
+        />
         <TextInput
           style={styles.textInput}
           placeholder="Answer"
