@@ -1,26 +1,62 @@
-import React from 'react'
-import {View, Text} from 'react-native'
-import {Button, Container, Header, Icon, Card} from '../../components'
-import {style} from '../../components/container/Container.styles'
-import {color} from '../../theme'
-import {styles} from './ResultScreen.styles'
+import {useNavigation, useRoute} from '@react-navigation/native';
+import React, {useState, useEffect} from 'react';
+import {quizAPI} from '../../configuration/Axios.configuration';
+import {color} from '../../theme';
+import {ResultScreenView} from './ResultScreen.view';
+import {useAppValue} from '../../context/AppProvider';
 
 export const ResultScreen = () => {
+  const navigation = useNavigation();
+  const route = useRoute();
+
+  const {state} = useAppValue();
+  const [score, setScore] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const numQuestions = route.params.length;
+
+  const data = {
+    userAnswers: route.params,
+  };
+
+  useEffect(() => {
+    const checkTestAnswers = () => {
+      setIsLoading(true);
+      quizAPI
+        .post('/checkanswers', data, {
+          headers: {Authorization: state.auth.token},
+        })
+        .then(response => {
+          setScore(response.data);
+        })
+        .catch(error => {
+          console.error(error);
+        })
+        .finally(() => setIsLoading(false));
+    };
+    checkTestAnswers();
+  }, []);
+
+  let textMessage, customScoreStyle;
+
+  if (score >= 0.6) {
+    textMessage = 'Congratulations! \n You passed the test';
+    customScoreStyle = {color: color.midGreen};
+  } else {
+    textMessage = "Sorry! \n You didn't pass the test";
+    customScoreStyle = {color: color.darkRed};
+  }
+
+  const numAnswersCorrect = score * numQuestions;
+
   return (
-  <>
-    <Header
-        rightElement={
-          <Icon
-            iconSet={'MaterialCommunityIcons'}
-            iconName={'account-circle-outline'}
-          />
-        }
-      />
-  <Container background={color.midGray} containerStyle={styles.container}>
-    <Card 
+    <ResultScreenView
+      numAnswersCorrect={numAnswersCorrect}
+      numQuestions={numQuestions}
+      textMessage={textMessage}
+      navigation={navigation}
+      customScoreStyle={customScoreStyle}
+      isLoading={isLoading}
     />
-    <Button  title={'Go to Dashboard'} buttonStyle={styles.button}/>
-  </Container>
-  </>
-  )
-}
+  );
+};

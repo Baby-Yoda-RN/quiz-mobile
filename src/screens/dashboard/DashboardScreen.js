@@ -1,22 +1,22 @@
 import React, {useState, useEffect} from 'react';
 import { View, FlatList} from 'react-native';
+
 import {Header, Container, ListItem} from '../../components';
 import {quizAPI} from '../../configuration/Axios.configuration';
-import {color, size} from '../../theme';
+import {size} from '../../theme';
+import {useNavigation} from '@react-navigation/native';
 
 export const DashboardScreen = ({navigation}) => {
   const [quiz, setData] = useState();
   const [isLoading, setIsLoading] = useState(false);
+  const navigation = useNavigation();
 
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
         quizAPI.get('/getalltests').then(({data}) => {
-          const sortData = data.sort(
-            (firstItem, secondItem) => firstItem.id - secondItem.id,
-          );
-          setData(sortData);
+          setData(data);
           setIsLoading(false);
         });
       } catch (error) {
@@ -69,6 +69,7 @@ export const DashboardScreen = ({navigation}) => {
 
       {isLoading || !quiz ? (
         <Container isLoading={isLoading}>
+
       ) : (
         <Container>
           <FlatList

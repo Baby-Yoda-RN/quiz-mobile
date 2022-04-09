@@ -1,21 +1,33 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {LoginScreenView} from './LoginScreen.view';
-import { AuthContext } from '../../context/auth/AuthContext';
+import {useAppValue} from '../../context/AppProvider';
+import {getLoginData} from '../../data/getLoginData';
+import {storeData} from '../../utilities/localStorage';
+import {TOKEN_KEY, SIGN_IN} from '../../constants/constants';
 
 export const LoginScreen = () => {
-
-  const {signIn} = React.useContext(AuthContext);
-
+  const {dispatch} = useAppValue();
   const [errors, setErrors] = useState({
     emailError: '',
     passwordError: '',
     credentialError: '',
   });
-  const [values, setValues] = useState({email: 'First.Last@gmail.com', password: 'First.Last@gmail.com'});
+  const [values, setValues] = useState({email: '', password: ''});
   const [isLoading, setIsLoading] = useState(false);
 
+  const signIn = async values => {
+    let data = await getLoginData(values);
+    if (data.error) {
+      return data;
+    }
+    await storeData(TOKEN_KEY, data.token);
+    dispatch({type: SIGN_IN, token: data.token});
+    return data;
+  };
+
   const handleLoginButtonPress = async () => {
-    setErrors({emailError: '', passwordError: ''});
+    setErrors({emailError: '', passwordError: '', credentialError: ''});
+    setIsLoading(true);
     if (!values.email) {
       setErrors(prevState => ({
         ...prevState,
@@ -34,15 +46,20 @@ export const LoginScreen = () => {
       }));
     }
     if (errors.emailError === '' && errors.passwordError === '') {
-      const response = await signIn(values)
-      if(response.error){
+      const response = await signIn(values);
+      if (response.error) {
         setErrors(prevState => ({
           ...prevState,
-          credentialError: response.error
-        }))
+          credentialError: response.error,
+        }));
       }
     }
+    setIsLoading(false);
   };
+
+  useEffect(() => {
+    return () => {}
+  },[])
 
   return (
     <LoginScreenView

@@ -20,7 +20,6 @@ export const LoginScreenView = ({
       </View>
       <View style={styles.textInputContainer}>
         <TextInput
-          style={styles.textInput}
           placeholder={'Email'}
           value={values.email}
           onChangeText={email =>
@@ -36,7 +35,6 @@ export const LoginScreenView = ({
       </View>
       <View style={styles.textInputContainer}>
         <TextInput
-          style={styles.textInput}
           isSensitive={true}
           placeholder={'Password'}
           value={values.password}
@@ -56,8 +54,8 @@ export const LoginScreenView = ({
           <Container isLoading={isLoading}>
         ) : (
           <Button
+            isDisabled={values.email.length&&values.password.length > 0 ? false : true}
             title={'Login'}
-            buttonStyle={styles.button}
             onPress={handleLoginButtonPress}
           />
         )}

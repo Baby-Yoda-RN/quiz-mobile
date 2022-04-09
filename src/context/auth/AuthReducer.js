@@ -1,10 +1,4 @@
-export const initialState = {
-  isLoading: true,
-  isSignout: false,
-  token: null,
-};
-
-export const reducer = (prevState, action) => {
+export const authReducer = (prevState, action) => {
   switch (action.type) {
     case 'RESTORE_TOKEN':
       return {
@@ -15,14 +9,16 @@ export const reducer = (prevState, action) => {
     case 'SIGN_IN':
       return {
         ...prevState,
-        isSignout: false,
         token: action.token,
+        isSignout: false,
       };
     case 'SIGN_OUT':
       return {
         ...prevState,
+        token: null,
         isSignout: true,
-        token: false,
       };
+    default:
+      return prevState;
   }
 };
