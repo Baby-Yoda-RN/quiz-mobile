@@ -1,10 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import {ActivityIndicator, Text, Image} from 'react-native';
 import {quizAPI} from '../../configuration/Axios.configuration';
-import {Header, Container} from '../../components';
 import {useNavigation} from '@react-navigation/native';
 import { useAppValue } from '../../context/AppProvider';
-import { removeData } from '../../utilities/localStorage';
+import { removeData } from '../../utilities';
 import {TOKEN_KEY, SIGN_OUT} from '../../constants'
 import { ProfileScreenView } from './ProfileScreen.view';
 
@@ -16,7 +14,7 @@ export const ProfileScreen = () => {
     name: '',
     email: '',
     image: '',
-    scores: 0,
+    scores: {'0': 0},
   });
 
   const signOut = async () => {
@@ -28,17 +26,16 @@ export const ProfileScreen = () => {
   const fetchData = async () => {
     setIsLoading(true);
     try {
-      quizAPI
-        .get('profile', {headers: {Authorization: state.auth.token}})
-        .then(({data}) => {
-          setUserInfo({
-            name: data.Name,
-            email: data.Email,
-            image: data.Image,
-            scores: data.Scores,
-          });
-          setIsLoading(false);
-        });
+      const result = await quizAPI.get('profile', {headers: {Authorization: state.auth.token}})
+      const {Name, Email, Image, Scores} = result.data;
+
+      setUserInfo({
+        name: Name,
+        email: Email,
+        image: Image,
+        scores: Scores,
+      })
+      
     } catch (error) {
       console.error(error);
     } finally {
