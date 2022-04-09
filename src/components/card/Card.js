@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text} from 'react-native';
 import {color} from '../../theme';
 import {styles} from './Card.style';
-import {Container} from '../components';
+import {Container} from '../../components';
 
 export const Card = ({
   textMessage,
