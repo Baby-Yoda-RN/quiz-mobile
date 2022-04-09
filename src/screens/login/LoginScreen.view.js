@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, ActivityIndicator} from 'react-native';
+import {View, Text} from 'react-native';
 import {Button, Container, TextInput} from '../../components';
 import {color} from '../../theme';
 import {styles} from './loginScreen.styles';
@@ -53,7 +53,7 @@ export const LoginScreenView = ({
       </View>
       <View style={styles.buttonContainer}>
         {isLoading ? (
-          <ActivityIndicator size={'large'} color={color.primary} />
+          <Container isLoading={isLoading}>
         ) : (
           <Button
             title={'Login'}
