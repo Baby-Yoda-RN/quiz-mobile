@@ -45,9 +45,6 @@ export const LoginScreenView = ({
             }))
           }
         />
-        {errors.passwordError !== '' && (
-          <Text style={styles.error}>{errors.passwordError}</Text>
-        )}
       </View>
       <View style={styles.buttonContainer}>
         {isLoading ? (
