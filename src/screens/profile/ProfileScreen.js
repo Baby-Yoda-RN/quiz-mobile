@@ -7,6 +7,8 @@ import { removeData } from '../../utilities/localStorage';
 import {TOKEN_KEY, SIGN_OUT} from '../../constants/constants'
 import axios from 'axios';
 
+console.log("QUIZ API: ", quizAPI)
+
 export const ProfileScreen = () => {
   const navigation = useNavigation();
   const {state,dispatch} = useAppValue()
@@ -30,10 +32,7 @@ export const ProfileScreen = () => {
     const fetchData = async () => {
     try {
       quizAPI
-        .get('profile', {
-          headers: {Authorization: state.auth.token},
-          cancelToken:source.token,
-        })
+        .get('profile')
         .then(({data}) => {
           if(isMounted){
             setUserInfo({
