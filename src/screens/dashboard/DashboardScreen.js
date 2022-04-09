@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {ActivityIndicator, View, FlatList} from 'react-native';
+import { View, FlatList} from 'react-native';
 import {Header, Container, ListItem} from '../../components';
 import {quizAPI} from '../../configuration/Axios.configuration';
 import {color, size} from '../../theme';
@@ -68,7 +68,7 @@ export const DashboardScreen = ({navigation}) => {
       />
 
       {isLoading || !quiz ? (
-        <ActivityIndicator size="large" />
+        <Container isLoading={isLoading}>
       ) : (
         <Container>
           <FlatList
