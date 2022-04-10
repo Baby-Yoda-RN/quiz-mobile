@@ -15,7 +15,7 @@ export const ProfileScreen = () => {
     name: '',
     email: '',
     image: '',
-    scores: 0,
+    scores: {'0': 0},
   });
 
   const signOut = async () => {
@@ -37,10 +37,10 @@ export const ProfileScreen = () => {
         .then(({data}) => {
           if(isMounted){
             setUserInfo({
-              name: data.Name,
-              email: data.Email,
-              image: data.Image,
-              scores: data.Scores,
+              name: Name,
+              email: Email,
+              image: Image,
+              scores: Scores,
             });
           }
         });

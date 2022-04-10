@@ -3,7 +3,6 @@ import {SafeAreaView, ActivityIndicator, View} from 'react-native';
 import {style} from './Container.styles';
 import {size} from '../../theme';
 import {color} from '../../theme';
-import {styles} from '../listView/ListView.styles';
 
 export const Container = ({
   children,
