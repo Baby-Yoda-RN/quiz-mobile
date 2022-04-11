@@ -1,19 +1,33 @@
-import Axios from 'axios';
+import axios from 'axios';
 import {getData} from '../utilities/localStorage';
-import {TOKEN_KEY} from '../context/AppContext' 
+import {TOKEN_KEY} from '../context/AppContext';
 
-let quizAPI = Axios.create({
+const instance = axios.create({
   baseURL:
     'http://ec2-54-218-161-100.us-west-2.compute.amazonaws.com:3000/api/',
 });
 
-(async () => {
-  try {
-    let token = await getData(TOKEN_KEY || 'authToken');
-    quizAPI.defaults.headers.common['Authorization'] = token;
-  } catch (error) {
-    console.error(error);
-  }
-})();
+instance.interceptors.request.use(
+  async config => {
+    const token = await getData(TOKEN_KEY || 'authToken');
+    if (token) config.headers.Authorization = token;
+    return config;
+  },
+  error => Promise.reject(error),
+);
 
-export {quizAPI};
+export const quizAPI = {
+  get: async endPoint => {
+    return instance
+      .get(endPoint)
+      .then(response => response)
+      .catch(error => Promise.reject(error));
+  },
+
+  post: async (endPoint, data) => {
+    return instance
+      .post(endPoint, data)
+      .then(response => response)
+      .catch(error => Promise.reject(error));
+  },
+};
