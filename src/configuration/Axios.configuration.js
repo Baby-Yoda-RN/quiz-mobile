@@ -1,10 +1,10 @@
 import axios from 'axios';
 import {getData} from '../utilities/localStorage';
 import {TOKEN_KEY} from '../context/AppContext';
+import Config from 'react-native-config';
 
 const instance = axios.create({
-  baseURL:
-    'http://ec2-54-218-161-100.us-west-2.compute.amazonaws.com:3000/api/',
+  baseURL: Config.API_URL,
 });
 
 instance.interceptors.request.use(
