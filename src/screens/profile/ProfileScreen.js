@@ -15,7 +15,7 @@ export const ProfileScreen = () => {
     name: '',
     email: '',
     image: '',
-    scores: {'0': 0},
+    scores: [0],
   });
 
   const signOut = async () => {
