@@ -1,15 +1,15 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {LoginScreenView} from './LoginScreen.view';
 import {useAppValue} from '../../context/AppProvider';
 import {getLoginData} from '../../data/getLoginData';
 import {storeData} from '../../utilities/localStorage';
 import {TOKEN_KEY, SIGN_IN} from '../../constants/constants';
+import {isValidEmail} from '../../utilities';
 
 export const LoginScreen = () => {
   const {dispatch} = useAppValue();
   const [errors, setErrors] = useState({
     emailError: '',
-    passwordError: '',
     credentialError: '',
   });
   const [values, setValues] = useState({email: '', password: ''});
@@ -21,45 +21,34 @@ export const LoginScreen = () => {
       return data;
     }
     await storeData(TOKEN_KEY, data.token);
-    dispatch({type: SIGN_IN, token: data.token});
-    return data;
+    try {
+      dispatch({type: SIGN_IN, token: data.token});
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleLoginButtonPress = async () => {
-    setErrors({emailError: '', passwordError: '', credentialError: ''});
+    setErrors({emailError: '', credentialError: ''});
     setIsLoading(true);
-    if (!values.email) {
+    if (isValidEmail(values.email) || !values.email) {
       setErrors(prevState => ({
         ...prevState,
-        emailError: 'Email is required',
+        emailError: 'Valid email is required',
       }));
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-      setErrors(prevState => ({
-        ...prevState,
-        emailError: 'Invalid email',
-      }));
-    }
-    if (!values.password) {
-      setErrors(prevState => ({
-        ...prevState,
-        passwordError: 'Password is required',
-      }));
-    }
-    if (errors.emailError === '' && errors.passwordError === '') {
+      setIsLoading(false);
+    } else{
       const response = await signIn(values);
       if (response.error) {
         setErrors(prevState => ({
           ...prevState,
           credentialError: response.error,
         }));
+        setIsLoading(false);
       }
     }
-    setIsLoading(false);
   };
-
-  useEffect(() => {
-    return () => {}
-  },[])
 
   return (
     <LoginScreenView
