@@ -4,6 +4,7 @@ import {Header, Container} from '../../components';
 import { styles } from './ProfileScreen.styles';
 
 export const ProfileScreenView = ({navigation, signOut, userInfo, isLoading}) => {
+
   return (
     <>
       <Header

@@ -14,10 +14,9 @@ export const DashboardScreen = () => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        quizAPI.get('/getalltests').then(({data}) => {
-          setData(data);
-          setIsLoading(false);
-        });
+        const data = await quizAPI.get('/getalltests');
+        setData(data.data);
+        setIsLoading(false);
       } catch (error) {
         console.error(error);
       } finally {

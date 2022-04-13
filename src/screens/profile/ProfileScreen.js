@@ -1,21 +1,21 @@
 import React, {useEffect, useState} from 'react';
-import {ProfileScreenView} from './ProfileScreen.view'
+import {ProfileScreenView} from './ProfileScreen.view';
 import {quizAPI} from '../../configuration/Axios.configuration';
 import {useNavigation} from '@react-navigation/native';
-import { useAppValue } from '../../context/AppProvider';
-import { removeData } from '../../utilities/localStorage';
-import {TOKEN_KEY, SIGN_OUT} from '../../constants/constants'
-import axios from 'axios';
+import {useAppValue} from '../../context/AppProvider';
+import {removeData} from '../../utilities/localStorage';
+import {TOKEN_KEY, SIGN_OUT} from '../../constants/constants';
+import {Text} from 'react-native';
 
 export const ProfileScreen = () => {
   const navigation = useNavigation();
-  const {state,dispatch} = useAppValue()
+  const {dispatch} = useAppValue();
   const [isLoading, setIsLoading] = useState(false);
   const [userInfo, setUserInfo] = useState({
     name: '',
     email: '',
     image: '',
-    scores: {'0': 0},
+    scores: [0],
   });
 
   const signOut = async () => {
@@ -24,42 +24,40 @@ export const ProfileScreen = () => {
   };
 
   useEffect(() => {
-    let isMounted = true
+    let isMounted = true;
     setIsLoading(true);
-    const source = axios.CancelToken.source()
     const fetchData = async () => {
-    try {
-      quizAPI
-        .get('profile', {
-          headers: {Authorization: state.auth.token},
-          cancelToken:source.token,
-        })
-        .then(({data}) => {
-          if(isMounted){
-            setUserInfo({
-              name: Name,
-              email: Email,
-              image: Image,
-              scores: Scores,
-            });
-          }
-        });
-    } catch (error) {
-      if(quizAPI.isCancel(error)){
-      }else{
-        console.error(error);
+      try {
+        const {
+          data: {name, email, image, scores},
+        } = await quizAPI.get('profile');
+
+        if (isMounted) {
+          setUserInfo({
+            name,
+            email,
+            image,
+            scores,
+          });
+        }
+      } catch (error) {
+        setError(true);
+        if (quizAPI.isCancel(error)) {
+        } else {
+          console.error(error);
+        }
+      } finally {
+        if (isMounted) setIsLoading(false);
       }
-    } finally {
-      if(isMounted)
-        setIsLoading(false);
-    }
-  };
+    };
     fetchData();
-    return () => {isMounted = false}
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   return (
-    <ProfileScreenView 
+    <ProfileScreenView
       navigation={navigation}
       signOut={signOut}
       userInfo={userInfo}
